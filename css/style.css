@@ -1,30 +1,17 @@
-.holder {
-    width: 200px;
-    height: 200px;
-    background-color: rgba(255, 255, 255, 0.8);
-    border: 1px solid rgba(0, 0, 0, 0.8);
-    font-size: 30px;
+:root {
+    --grid-cols: 1;
+    --grid-rows: 1;
 }
-
-.image {
-    height: 200px;
-    width: 200px;
-    background-color: black;
-    position: relative;
-    cursor: pointer;
-}
-
 
 #container {
-    top: 200px;
-    width: 400px;
-    position: relative;
+    display: grid;
+    grid-gap: 1em;
+    grid-template-rows: repeat(var(--grid-rows), 1fr);
+    grid-template-columns: repeat(var(--grid-cols), 1fr);
 }
 
-.grid-container {
-    width: 0px;
-    margin: 2rem;
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
-    grid-template-rows: 1fr 1fr 1fr;
+.grid-item {
+    padding: 1em;
+    border: 1px solid #ddd;
+    text-align: center;
 }
