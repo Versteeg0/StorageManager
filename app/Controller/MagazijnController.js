@@ -1,5 +1,6 @@
 import { DecoratieView } from "../View/DecoratieView.js";
 import {KledingView} from "../View/KledingView.js";
+import {TierelantijnView} from "../View/TierelantijnView.js";
 
 export default class MagazijnController{
     viewContainer;
@@ -9,51 +10,76 @@ export default class MagazijnController{
 
         this.decoratieView = new DecoratieView(this);
         this.kledingView = new KledingView(this);
+        this.tierelantijnView = new TierelantijnView(this);
 
         this.createMenu();
         this.decoratieView.draw();
+        this.kledingView.draw();
+        this.tierelantijnView.draw();
+
+        document.getElementById("kleding").style.display = "none";
+        document.getElementById("tierelantijn").style.display = "none";
     }
 
     createMenu() {
         //Create menu div
-        let menu = document.createElement("div");
-        menu.className="menu";
+        let menu = document.createElement("nav");
+        menu.classList.add("navbar", "navbar-expand-sm", "bg-dark", "navbar-dark")
+
+        let ul = document.createElement("ul");
+        ul.classList.add("navbar-nav");
 
         //Create deco link
-        let decoA = document.createElement("button");
-        let deco = document.createTextNode("Decoratie");
+        let decoLi = document.createElement("li");
+        decoLi.classList.add("nav-item");
+        let decoA = document.createElement("a");
+        decoA.classList.add("nav-item", "nav-link");
+        decoA.innerText = "Decoratie";
 
-        decoA.appendChild(deco);
-        menu.appendChild(decoA);
+        decoLi.appendChild(decoA);
+        ul.appendChild(decoLi);
 
         //Create clothing link
-        let kledingA = document.createElement("button");
-        let kleding = document.createTextNode("Kleding");
+        let kledingLi = document.createElement("li");
+        kledingLi.classList.add("nav-item");
+        let kledingA = document.createElement("a");
+        kledingA.classList.add("nav-item", "nav-link");
+        kledingA.innerText = "Kleding";
 
-        kledingA.appendChild(kleding);
-        menu.appendChild(kledingA)
+        kledingLi.appendChild(kledingA);
+        ul.appendChild(kledingLi);
 
         //Create tierelantijn link
-        let tierA = document.createElement("button");
-        let tier = document.createTextNode("Tierelantijn");
+        let tierLI = document.createElement("li");
+        tierLI.classList.add("nav-item");
+        let tierA = document.createElement("a");
+        tierA.classList.add("nav-item", "nav-link");
+        tierA.innerText = "Tierelantijn";
 
-        tierA.appendChild(tier);
-        menu.appendChild(tierA);
+        tierLI.appendChild(tierA);
+        ul.appendChild(tierLI);
 
+        menu.appendChild(ul);
         this.viewContainer.append(menu)
-
 
         //Create eventlisteners
         decoA.addEventListener('click', function(){
-            this.decoratieView.draw();
+            document.getElementById("decoratie").style.display = "block";
+            document.getElementById("kleding").style.display = "none";
+            document.getElementById("tierelantijn").style.display = "none";
         });
 
         kledingA.addEventListener('click', function(){
-            this.kledingView.draw();
+            document.getElementById("decoratie").style.display = "none";
+            document.getElementById("kleding").style.display = "block";
+            document.getElementById("tierelantijn").style.display = "none";
         });
 
+
         tierA.addEventListener('click', function(){
-            alert("tierA");
+            document.getElementById("decoratie").style.display = "none";
+            document.getElementById("kleding").style.display = "none";
+            document.getElementById("tierelantijn").style.display = "block";
         })
     }
 }

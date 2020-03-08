@@ -3,17 +3,23 @@ export class DecoratieView{
 
     constructor(controller) {
         this.container = document.getElementById('container')
-        this.row = document.getElementsByClassName("gridRow");
+        this.decoratieContainer = document.createElement("div");
+        this.decoratieContainer.id = "decoratie";
+        this.row = document.getElementsByClassName("dRow");
     }
-
     draw(){
+        let header = document.createElement("h2");
+        header.innerText = "Decoratie";
+        this.decoratieContainer.appendChild(header);
+
         this.makeRow();
         this.makeColumns();
     }
 
     makeRow(){
         let row = document.createElement("div");
-        this.container.appendChild(row).className = "gridRow";
+        this.decoratieContainer.appendChild(row).className = "dRow";
+        this.container.appendChild(this.decoratieContainer);
     }
 
     makeColumns(){
@@ -22,5 +28,4 @@ export class DecoratieView{
                 this.row[0].appendChild(newCell).className = "cell";
         };
     }
-
 }
