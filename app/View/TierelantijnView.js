@@ -1,18 +1,17 @@
-export class KledingView{
+export class TierelantijnView{
     row;
 
     constructor(controller) {
         this.container = document.getElementById('container')
-        this.kledingContainer = document.createElement("div");
-        this.kledingContainer.id = "kleding";
-        this.row = document.getElementsByClassName("kRow");
+        this.tierelantijnContainer = document.createElement("div");
+        this.tierelantijnContainer.id = "tierelantijn";
+        this.row = document.getElementsByClassName("tRow");
     }
 
     draw(){
         let header = document.createElement("h2");
-        header.innerText = "Kleding";
-        this.kledingContainer.appendChild(header);
-
+        header.innerText = "Tierelantijn";
+        this.tierelantijnContainer.appendChild(header);
 
         this.makeRow();
         this.makeColumns();
@@ -20,8 +19,8 @@ export class KledingView{
 
     makeRow(){
         let row = document.createElement("div");
-        this.kledingContainer.appendChild(row).className = "kRow";
-        this.container.appendChild(this.kledingContainer);
+        this.tierelantijnContainer.appendChild(row).className = "tRow";
+        this.container.appendChild(this.tierelantijnContainer);
     }
 
     makeColumns(){

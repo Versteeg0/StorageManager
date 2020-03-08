@@ -1,8 +1,8 @@
-.menu button{
-    margin-right: 5px;
+.hide{
+    display: none;
 }
 
-.gridRow {
+.dRow, .kRow, .tRow{
     width: 0px;
     margin: 2rem;
     display: grid;
