@@ -12,7 +12,6 @@ export default class MagazijnController{
 
         this.createMenu();
         this.decoratieView.draw();
-
     }
 
     createMenu() {
