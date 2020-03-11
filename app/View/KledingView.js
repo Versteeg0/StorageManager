@@ -1,8 +1,8 @@
 export class KledingView{
-    row;
+
 
     constructor(controller) {
-        this.container = document.getElementById('container')
+        this.container = document.getElementById('container');
         this.kledingContainer = document.createElement("div");
         this.kledingContainer.id = "kleding";
         this.row = document.getElementsByClassName("kRow");
@@ -28,6 +28,6 @@ export class KledingView{
         for (let i = 0; i < 225; i++) {
             let newCell = document.createElement("div");
             this.row[0].appendChild(newCell).className = "cell";
-        };
+        }
     }
 }
