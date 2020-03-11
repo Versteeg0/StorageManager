@@ -1,5 +1,4 @@
 export class MenuView{
-    row;
 
     constructor(controller) {
         this.container = document.getElementById('container');
@@ -44,7 +43,7 @@ export class MenuView{
         ul.appendChild(tierLI);
 
         menu.appendChild(ul);
-        this.container.append(menu)
+        this.container.append(menu);
 
         //Create eventlisteners
         decoA.addEventListener('click', function(){

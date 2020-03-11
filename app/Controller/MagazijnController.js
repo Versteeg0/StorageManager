@@ -4,11 +4,8 @@ import {TierelantijnView} from "../View/TierelantijnView.js";
 import {MenuView} from "../View/MenuView.js";
 
 export default class MagazijnController{
-    viewContainer;
 
     constructor() {
-        this.viewContainer = document.getElementById('container');
-
         this.decoratieView = new DecoratieView(this);
         this.kledingView = new KledingView(this);
         this.tierelantijnView = new TierelantijnView(this);
