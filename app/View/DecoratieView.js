@@ -1,8 +1,7 @@
 export class DecoratieView{
-    row;
 
     constructor(controller) {
-        this.container = document.getElementById('container')
+        this.container = document.getElementById('container');
         this.decoratieContainer = document.createElement("div");
         this.decoratieContainer.id = "decoratie";
         this.row = document.getElementsByClassName("dRow");
@@ -26,6 +25,6 @@ export class DecoratieView{
         for (let i = 0; i < 225; i++) {
                 let newCell = document.createElement("div");
                 this.row[0].appendChild(newCell).className = "cell";
-        };
+        }
     }
 }

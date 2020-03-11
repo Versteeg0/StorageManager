@@ -1,8 +1,7 @@
 export class TierelantijnView{
-    row;
 
     constructor(controller) {
-        this.container = document.getElementById('container')
+        this.container = document.getElementById('container');
         this.tierelantijnContainer = document.createElement("div");
         this.tierelantijnContainer.id = "tierelantijn";
         this.row = document.getElementsByClassName("tRow");
@@ -27,6 +26,6 @@ export class TierelantijnView{
         for (let i = 0; i < 225; i++) {
             let newCell = document.createElement("div");
             this.row[0].appendChild(newCell).className = "cell";
-        };
+        }
     }
 }

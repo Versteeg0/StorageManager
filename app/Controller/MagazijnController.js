@@ -3,7 +3,6 @@ import {KledingView} from "../View/KledingView.js";
 import {TierelantijnView} from "../View/TierelantijnView.js";
 
 export default class MagazijnController{
-    viewContainer;
 
     constructor() {
         this.viewContainer = document.getElementById('container');
@@ -24,7 +23,7 @@ export default class MagazijnController{
     createMenu() {
         //Create menu div
         let menu = document.createElement("nav");
-        menu.classList.add("navbar", "navbar-expand-sm", "bg-dark", "navbar-dark")
+        menu.classList.add("navbar", "navbar-expand-sm", "bg-dark", "navbar-dark");
 
         let ul = document.createElement("ul");
         ul.classList.add("navbar-nav");
@@ -60,7 +59,7 @@ export default class MagazijnController{
         ul.appendChild(tierLI);
 
         menu.appendChild(ul);
-        this.viewContainer.append(menu)
+        this.viewContainer.append(menu);
 
         //Create eventlisteners
         decoA.addEventListener('click', function(){
