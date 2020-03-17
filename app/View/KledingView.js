@@ -13,7 +13,6 @@ export class KledingView{
         header.innerText = "Kleding";
         this.kledingContainer.appendChild(header);
 
-
         this.makeRow();
         this.makeColumns();
     }

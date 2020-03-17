@@ -1,3 +1,3 @@
-import  MagazijnController from './Controller/MagazijnController.js';
+import  MagazijnController from './Controller/MagazijnController';
 
 let controller = new MagazijnController();
