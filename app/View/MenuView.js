@@ -7,7 +7,7 @@ export class MenuView{
     createMenu() {
         //Create menu div
         let menu = document.createElement("nav");
-        menu.classList.add("navbar", "navbar-expand-sm", "bg-dark", "navbar-dark")
+        menu.classList.add("navbar", "navbar-expand-sm", "bg-dark", "navbar-dark");
 
         let ul = document.createElement("ul");
         ul.classList.add("navbar-nav");
