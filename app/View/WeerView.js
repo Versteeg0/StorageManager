@@ -87,18 +87,13 @@ export class WeerView {
 
         this.container.appendChild(weerDiv);
 
-        this.chooseCity.addEventListener("click", function() {
+        this.chooseCity.addEventListener("click", () => {
             tableName.innerText =  this.chooseCity.value;
             this.getTemp(this.chooseCity.value);
-        })
+        });
     }
 
     setTemp(temp){
-        alert(temp);
         this.tableTemp.innerText = temp;
     }
-    /*function openPossibleWeather() {
-        document.getElementById("chooseCity").classList.toggle("Active");
-    }*/
-
 }

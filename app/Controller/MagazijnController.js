@@ -26,7 +26,7 @@ export default class MagazijnController{
 
         this.weerView.getTemp = (city) =>{
             let temp = this.Weer.getTemperature(city);
-            alert(temp);
+            //alert(temp);
             this.weerView.setTemp(temp);
         };
 

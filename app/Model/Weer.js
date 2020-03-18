@@ -21,7 +21,9 @@ export class Weer {
         fetch('http://weerlive.nl/api/json-data-10min.php?key=33156b745d&locatie=' + city)
             .then(function(resp) { return resp.json() })
             .then(function (data) {
-                    return data.liveweer[0].temp
+                   const x = data.liveweer[0].temp;
+                   console.log(x);
+                   return x;
                 })
             .catch(function(error){
             console.log(error);
@@ -49,7 +51,6 @@ export class Weer {
 
     getTemperature(city) {
         let api = this.generateJsonFromAPI(city);
-
         return api;
     }
 }
