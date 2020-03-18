@@ -2,55 +2,25 @@ export class Weer {
 
 
     generateJsonFromAPI(city) {
-        /*        return new Promise((resolve, reject) => {
-                    fetch('http://weerlive.nl/api/json-data-10min.php?key=33156b745d&locatie=' + city)
-                        .then(response => response.json().then(data => {
-                            if(data.success == 'success') {
-                                console.log(response);
-                                resolve(data.success);
-                            }
-                            else
-                                reject(data);
-                        }))
-                        .catch(err => reject(err))
-                        .finally(() => {
-                            this.counter++;
-                        });
-                });*/
-
-        fetch('http://weerlive.nl/api/json-data-10min.php?key=33156b745d&locatie=' + city)
+       return fetch('http://weerlive.nl/api/json-data-10min.php?key=33156b745d&locatie=' + city)
             .then(function(resp) { return resp.json() })
-            .then(function (data) {
-                   const x = data.liveweer[0].temp;
-                   console.log(x);
+            .then(function (response) {
+                   let x = response.liveweer[0].temp;
+                   console.log(x)
                    return x;
                 })
             .catch(function(error){
             console.log(error);
-        });
+            });
 
-
-
+   /*     return fetch('http://weerlive.nl/api/json-data-10min.php?key=33156b745d&locatie=' + city)
+            .then(res => res.json()) //wat denk jij dat dit doet?
+            .then(data => {
+                if(data.status != 'success')
+                    return Promise.reject(data.status); //en dit?
+                console.log(data.liveweer[0].temp);
+                return data.liveweer[0].temp;
+            })*/
     }
 
-
-
-
-    getWeatherFromJson(jsonResult) {
-        let result = JSON.parse(jsonResult);
-
-        let cities = {};
-
-        for (let i = 0, std; i < result.steden.length; i++) {
-            std = result.steden[i];
-            steden[std.id] = std;
-        }
-
-        return console.log(steden);
-    }
-
-    getTemperature(city) {
-        let api = this.generateJsonFromAPI(city);
-        return api;
-    }
 }
