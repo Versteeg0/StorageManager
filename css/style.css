@@ -1,7 +1,3 @@
-.hide{
-    display: none;
-}
-
 #decoratie, #kleding, #tierelantijn{
     text-align: center;
     align-self: center;
@@ -31,4 +27,19 @@
     border: 1px solid rgba(0, 0, 0, 0.8);
     font-size: 30px;
 }
+
+#weerDiv {
+    position: absolute;
+    right: 120px;
+    bottom: 10px;
+    width: 400px;
+    height: 300px;
+    border: 1px solid rgba(0, 0, 0, 0.8);
+}
+
+#chooseCity.active {
+    display: block;
+}
+
+
 
