@@ -23,7 +23,12 @@ export default class MagazijnController{
         this.tierelantijnView.draw();
         this.formView.createForm();
         this.weerView.generateTable();
-        this.Weer.getTemperature("Nijmegen");
+
+        this.weerView.getTemp = (city) =>{
+            let temp = this.Weer.getTemperature(city);
+            alert(temp);
+            this.weerView.setTemp(temp);
+        };
 
         document.getElementById("kleding").style.display = "none";
         document.getElementById("tierelantijn").style.display = "none";

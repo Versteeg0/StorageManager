@@ -8,9 +8,9 @@ export class WeerView {
         let weerDiv = document.createElement("div");
         weerDiv.id='weerDiv';
 
-        let chooseCity = document.createElement("select");
-        chooseCity.classList.add("form-control");
-        chooseCity.id = 'chooseCity';
+        this.chooseCity = document.createElement("select");
+        this.chooseCity.classList.add("form-control");
+        this.chooseCity.id = 'chooseCity';
 
         let option1 = document.createElement("option");
         option1.innerText = "Amsterdam";
@@ -48,18 +48,18 @@ export class WeerView {
         let option12 = document.createElement("option");
         option12.innerText = "Maastricht";
 
-        chooseCity.appendChild(option1);
-        chooseCity.appendChild(option2);
-        chooseCity.appendChild(option3);
-        chooseCity.appendChild(option4);
-        chooseCity.appendChild(option5);
-        chooseCity.appendChild(option6);
-        chooseCity.appendChild(option7);
-        chooseCity.appendChild(option8);
-        chooseCity.appendChild(option9);
-        chooseCity.appendChild(option10);
-        chooseCity.appendChild(option11);
-        chooseCity.appendChild(option12);
+        this.chooseCity.appendChild(option1);
+        this.chooseCity.appendChild(option2);
+        this.chooseCity.appendChild(option3);
+        this.chooseCity.appendChild(option4);
+        this.chooseCity.appendChild(option5);
+        this.chooseCity.appendChild(option6);
+        this.chooseCity.appendChild(option7);
+        this.chooseCity.appendChild(option8);
+        this.chooseCity.appendChild(option9);
+        this.chooseCity.appendChild(option10);
+        this.chooseCity.appendChild(option11);
+        this.chooseCity.appendChild(option12);
 
         let table = document.createElement("table");
         table.classList.add("table");
@@ -69,30 +69,34 @@ export class WeerView {
 
         let tableName = document.createElement("td");
         tableName.id = 'tableName';
-        tableName.innerText = chooseCity.value;
+        tableName.innerText = this.chooseCity.value;
 
-        let tableTemp = document.createElement("td");
-        tableTemp.id = 'tableTemp';
+        this.tableTemp = document.createElement("td");
+        this.tableTemp.id = 'tableTemp';
 
         tableR.appendChild(tableName);
-        tableR.appendChild(tableTemp);
+        tableR.appendChild(this.tableTemp);
 
         tableBody.appendChild(tableR);
 
         table.appendChild(tableR);
 
-        weerDiv.appendChild(chooseCity);
+        weerDiv.appendChild(this.chooseCity);
 
         weerDiv.appendChild(table);
 
         this.container.appendChild(weerDiv);
 
-        chooseCity.addEventListener("click",function() {
-            tableName.innerText = chooseCity.value;
-            tableTemp.innerText = "test";
+        this.chooseCity.addEventListener("click", function() {
+            tableName.innerText =  this.chooseCity.value;
+            this.getTemp(this.chooseCity.value);
         })
     }
 
+    setTemp(temp){
+        alert(temp);
+        this.tableTemp.innerText = temp;
+    }
     /*function openPossibleWeather() {
         document.getElementById("chooseCity").classList.toggle("Active");
     }*/
