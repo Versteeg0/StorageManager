@@ -1,6 +1,6 @@
 export class TierelantijnView{
 
-    constructor(controller) {
+    constructor() {
         this.container = document.getElementById('container');
         this.tierelantijnContainer = document.createElement("div");
         this.tierelantijnContainer.id = "tierelantijn";
