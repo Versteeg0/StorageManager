@@ -36,22 +36,21 @@ export default class MagazijnController{
             this.formView.phase3(this.item.category);
         };
 
-        this.formView.processPhase3 = (e, data) => {
+        this.formView.processPhase3 = (data) => {
             if(this.item.category == "Decoratie"){
-                this.item.size = data[0];
-                this.item.color = data[1];
-                this.item.amountInBox = data[2];
+                this.item.size = data.size;
+                this.item.color = data.color;
+                this.item.amountInBox = data.amount;
             }else if(this.item.category == "Kleding"){
-                this.item.color = data[0];
-                this.item.weight = data[1];
+                this.item.color = data.color;
+                this.item.weight = data.weight;
             }else{
-                this.item.weight = data[0];
+                this.item.weight = data.weight;
             }
 
             this.itemService.saveItem(this.item);
-          /*  this.formview.phase1();
+            this.formView.phase1();
             this.item = new MagazijnItem();
-            e.preventDefault();*/
         };
 
         document.getElementById("kleding").style.display = "none";

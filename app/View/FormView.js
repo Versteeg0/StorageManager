@@ -16,6 +16,9 @@ export class FormView{
     }
 
     phase1(){
+        while (this.form.hasChildNodes()) {
+            this.form.removeChild(this.form.lastChild);
+        }
         this.phase1Form = document.createElement("form-group");
         this.phase1Form.id = "phase1";
 
@@ -72,9 +75,9 @@ export class FormView{
         this.errorMessage.style.display = "none";
 
         this.phase2Button = document.createButton('phase2Button', 'Volgende');
-        this.inputs = [this.naamInput.value, this.beschrijvingInput.value, this.minVoorraadInput.value, this.hVoorraadInput.value]
         this.phase2Button.addEventListener('click', () => {
-                this.processPhase2(this.inputs);
+            this.inputs = [this.naamInput.value, this.beschrijvingInput.value, this.minVoorraadInput.value, this.hVoorraadInput.value]
+            this.processPhase2(this.inputs);
         });
         this.phase2Form.appendChild(this.phase2Button);
         this.form.appendChild(this.phase2Form);
@@ -102,11 +105,17 @@ export class FormView{
             this.amountInput = document.createInput("amountInput", "Hoeveelheid van product");
             this.phase3Form.appendChild(this.amount);
             this.phase3Form.appendChild(this.amountInput);
-
-            this.phase3Button.addEventListener('submit', (e) => {
+            
+            this.phase3Button.addEventListener('click', (e) => {
+                this.inputs = {
+                    size: this.sizeInput.value,
+                    color: this.colorInput.value,
+                    amount:  this.amountInput.value
+                };
                 e.preventDefault();
-                this.processPhase3([this.sizeInput.value, this.colorInput.value, this.amountInput.value]);
+                this.processPhase3(this.inputs);
             });
+
         }else if(data == "Kleding"){
             this.color = document.createLabel("Wat is de kleur van het kledingstuk?");
             this.colorInput = document.createInput("colorInput", "Kleur van product");
@@ -119,22 +128,32 @@ export class FormView{
             this.phase3Form.appendChild(this.weightInput);
 
             this.phase3Button.addEventListener('click', (e) => {
+                this.inputs = {
+                    color: this.colorInput.value,
+                    weight: this.weightInput.value
+                }
                 e.preventDefault();
-                this.processPhase3([this.colorInput.value, this.weightInput.value]);
+                this.processPhase3(this.inputs);
             });
+
         }else{
             this.weight = document.createLabel("Wat is het gewicht van de tierelantijn?");
             this.weightInput = document.createInput("weightInput", "Gewicht van product");
             this.phase3Form.appendChild(this.weight);
             this.phase3Form.appendChild(this.weightInput);
 
-            this.phase3Button.addEventListener('submit', (e) => {
+            this.phase3Button.addEventListener('click', (e) => {
+                this.inputs = {
+                    weight: this.weightInput.value
+                }
                 e.preventDefault();
-                this.processPhase3([this.weightInput.value]);
+                this.processPhase3(this.inputs);
             });
+
         }
         this.phase3Form.appendChild(this.phase3Button);
         this.form.appendChild(this.phase3Form);
 
     }
+
 }
