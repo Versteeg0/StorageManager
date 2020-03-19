@@ -1,7 +1,7 @@
 export class KledingView{
 
 
-    constructor(controller) {
+    constructor() {
         this.container = document.getElementById('container');
         this.kledingContainer = document.createElement("div");
         this.kledingContainer.id = "kleding";

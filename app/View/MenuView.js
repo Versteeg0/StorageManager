@@ -1,6 +1,6 @@
 export class MenuView{
 
-    constructor(controller) {
+    constructor() {
         this.container = document.getElementById('container');
     }
 

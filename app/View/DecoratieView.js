@@ -1,6 +1,6 @@
 export class DecoratieView{
 
-    constructor(controller) {
+    constructor() {
         this.container = document.getElementById('container');
         this.decoratieContainer = document.createElement("div");
         this.decoratieContainer.id = "decoratie";
