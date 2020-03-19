@@ -25,25 +25,16 @@ export default class MagazijnController{
         this.weerView.generateTable();
 
         this.weerView.getTemp = (city) =>{
-            let temp = this.apiTemp(city);
-            alert("hallo");
-            this.weerView.setTemp(temp);
+            this.getTemp(city);
         };
 
         document.getElementById("kleding").style.display = "none";
         document.getElementById("tierelantijn").style.display = "none";
     }
 
-    async apiTemp(city){
-        alert("hallo");
-        try {
-            let temp = await this.Weer.generateJsonFromAPI(city);
-            return temp.value;
-        }
-        catch(err){
-            console.log(`error = ${err}` )
-        }
+    async getTemp(city){
+        let x = await this.Weer.generateJsonFromAPI(city);
+        this.weerView.setTemp(x);
     }
-
 
 }
