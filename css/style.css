@@ -2,13 +2,17 @@
     display: none;
 }
 
+#itemDrop{
+    margin-left: 400px;
+    width: 300px;
+}
+
 #decoratie, #kleding, #tierelantijn{
     text-align: center;
     align-self: center;
 }
 
-.dRow, .kRow, .tRow{
-    width: 0px;
+.dGrid, .kRow, .tRow{
     margin: 2rem;
     display: grid;
     grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;

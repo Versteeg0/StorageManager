@@ -8,7 +8,14 @@ export class MagazijnItemService{
         localStorage.setItem('items', JSON.stringify(itemArray));
     }
 
-    getItems(){
-       return localStorage.getItem('items');
+    getItems(category){
+        let x = JSON.parse(localStorage.getItem('items'));
+        let items = [];
+        for(let i = 0; i < x.length; i++){
+            if(x[i].category === category){
+                items.push(x[i]);
+            }
+        }
+        return items;
     }
 }
