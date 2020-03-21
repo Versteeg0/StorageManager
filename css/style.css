@@ -12,7 +12,7 @@
     align-self: center;
 }
 
-.dGrid, .kGrid, .kGrid{
+.dGrid, .kGrid, .tGrid{
     margin: 2rem;
     display: grid;
     grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
