@@ -15,16 +15,23 @@ export default class MagazijnController{
         this.Weer = new Weer();
         this.item = new MagazijnItem();
         this.itemService = new MagazijnItemService();
+
         this.decoratieView = new DecoratieView();
+        this.decoratieItems = this.itemService.getItems("Decoratie");
+
         this.kledingView = new KledingView();
+        this.kledingItems = this.itemService.getItems("Kleding");
+
         this.tierelantijnView = new TierelantijnView();
+        this.tierelantijnItems = this.itemService.getItems("Tierelantijn");
+
         this.menuView = new MenuView();
         this.formView = new FormView();
 
         this.menuView.createMenu();
-        this.decoratieView.draw();
-        this.kledingView.draw();
-        this.tierelantijnView.draw();
+        this.decoratieView.draw(this.decoratieItems);
+        this.kledingView.draw(this.kledingItems);
+        this.tierelantijnView.draw(this.tierelantijnItems);
         this.formView.createForm();
         this.weerView.generateTable();
 
