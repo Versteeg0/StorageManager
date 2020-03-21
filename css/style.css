@@ -2,8 +2,9 @@
     display: none;
 }
 
-#itemDrop{
+#itemDrop, #selectedDItem,  #selectedKItem, #selectedTItem{
     margin-left: 400px;
+    margin-bottom: 50px;
     width: 300px;
 }
 
@@ -27,9 +28,15 @@
     margin: 20px 0;
 }
 
+.dropValue{
+    font-size: 20px;
+}
+
 .cell {
-    width: 50px;
-    height: 50px;
+    min-width: 50px;
+    min-height: 50px;
+    max-width: 50px;
+    max-height: 50px;
     background-color: rgba(255, 255, 255, 0.8);
     border: 1px solid rgba(0, 0, 0, 0.8);
     font-size: 30px;

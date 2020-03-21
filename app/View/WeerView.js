@@ -77,8 +77,6 @@ export class WeerView {
         tableR.appendChild(tableName);
         tableR.appendChild(this.tableTemp);
 
-
-
         tableBody.appendChild(tableR);
 
         table.appendChild(tableR);
