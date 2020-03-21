@@ -43,6 +43,22 @@ export class DecoratieView{
         let dropdown = document.createSelect(array);
         dropdown.id = "itemDrop";
 
+        dropdown.addEventListener('click', () => {
+           let oldItem = document.getElementById("selectedDItem");
+            if(oldItem != null){
+                this.dropdownCol.removeChild(oldItem);
+            }
+           let selectedItem = document.createElement("div");
+           selectedItem.className = "cell";
+           selectedItem.id = "selectedDItem";
+
+           let dropValue = document.createLabel(dropdown.value.substr(0,4));
+           dropValue.classList.add("dropValue");
+           selectedItem.appendChild(dropValue);
+
+           this.dropdownCol.appendChild(selectedItem);
+        });
+
         this.dropdownCol.appendChild(dropdown);
         this.decoratieRow.appendChild(this.dropdownCol);
     }

@@ -43,6 +43,23 @@ export class TierelantijnView{
         let dropdown = document.createSelect(array);
         dropdown.id = "itemDrop";
 
+        dropdown.addEventListener('click', () => {
+            let oldItem = document.getElementById("selectedTItem");
+            if(oldItem != null){
+                this.dropdownCol.removeChild(oldItem);
+            }
+            let selectedItem = document.createElement("div");
+            selectedItem.className = "cell";
+            selectedItem.id = "selectedTItem";
+
+            let dropValue = document.createLabel(dropdown.value.substr(0,4));
+            dropValue.classList.add("dropValue");
+            selectedItem.appendChild(dropValue);
+
+            this.dropdownCol.appendChild(selectedItem);
+        });
+
+
         this.dropdownCol.appendChild(dropdown);
         this.tierelantijnRow.appendChild(this.dropdownCol);
     }
