@@ -28,7 +28,14 @@ export class DecoratieView{
     makeColumns(){
         for (let i = 0; i < 225; i++) {
                 let newCell = document.createElement("div");
-                this.grid.appendChild(newCell).className = "cell";
+                newCell.classList.add("holder", "cell");
+                newCell.addEventListener('dragover', (event) => {
+                    newCell.ondragover = this.onDragOver(event);
+                });
+                newCell.addEventListener('drop', (event) => {
+                    newCell.ondrop = this.onDrop(event);
+                });
+                this.grid.appendChild(newCell);
         }
     }
 
@@ -51,7 +58,10 @@ export class DecoratieView{
            let selectedItem = document.createElement("div");
            selectedItem.className = "cell";
            selectedItem.id = "selectedDItem";
-
+           selectedItem.draggable = true;
+            selectedItem.addEventListener('dragstart', (event) => {
+                selectedItem.ondragstart = this.onDragStart(event);
+            });
            let dropValue = document.createLabel(dropdown.value.substr(0,4));
            dropValue.classList.add("dropValue");
            selectedItem.appendChild(dropValue);
@@ -61,5 +71,38 @@ export class DecoratieView{
 
         this.dropdownCol.appendChild(dropdown);
         this.decoratieRow.appendChild(this.dropdownCol);
+    }
+
+    onDragStart(event) {
+        if(event.dataTransfer) {
+            event
+                .dataTransfer
+                .setData('text/plain', event.target.id);
+        }
+        else if(event.originalEvent.dataTransfer) {
+            event
+                .originalEvent
+                .dataTransfer
+                .setData('text/plain', event.target.id);
+        }
+    }
+
+    onDragOver(event) {
+        event.preventDefault();
+    }
+
+    onDrop(event) {
+        const id = event
+            .dataTransfer
+            .getData('text');
+
+        const draggableElement = document.getElementById(id);
+        const dropzone = event.target;
+
+        dropzone.appendChild(draggableElement);
+
+        event
+            .dataTransfer
+            .clearData();
     }
 }
