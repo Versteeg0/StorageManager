@@ -19,7 +19,6 @@
     margin: 20px 0;
 }
 
-
 .cell {
     width: 50px;
     height: 50px;
@@ -30,11 +29,12 @@
 
 #weerDiv {
     position: absolute;
+    background: whitesmoke;
     right: 120px;
     bottom: 10px;
-    width: 400px;
-    height: 300px;
-    border: 1px solid rgba(0, 0, 0, 0.8);
+    width: 200px;
+    height: 100px;
+    border: 3px solid pink;
 }
 
 #chooseCity.active {

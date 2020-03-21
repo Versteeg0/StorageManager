@@ -24,9 +24,12 @@ export default class MagazijnController{
         this.formView.createForm();
         this.weerView.generateTable();
 
+
         this.weerView.getTemp = (city) =>{
             this.getTemp(city);
         };
+
+        this.weerView.getTemp("Amsterdam");
 
         document.getElementById("kleding").style.display = "none";
         document.getElementById("tierelantijn").style.display = "none";
