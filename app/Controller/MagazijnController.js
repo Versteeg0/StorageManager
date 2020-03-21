@@ -3,12 +3,16 @@ import {KledingView} from "../View/KledingView";
 import {TierelantijnView} from "../View/TierelantijnView";
 import {MenuView} from "../View/MenuView";
 import {FormView} from "../View/FormView";
+import {WeerView} from "../View/WeerView";
+import {Weer} from "../Model/Weer.js"
 import {MagazijnItem} from "../Model/MagazijnItem";
 import {MagazijnItemService} from "../Model/MagazijnItemService";
 
 export default class MagazijnController{
 
     constructor() {
+        this.weerView = new WeerView();
+        this.Weer = new Weer();
         this.item = new MagazijnItem();
         this.itemService = new MagazijnItemService();
 
@@ -29,6 +33,14 @@ export default class MagazijnController{
         this.kledingView.draw(this.kledingItems);
         this.tierelantijnView.draw(this.tierelantijnItems);
         this.formView.createForm();
+        this.weerView.generateTable();
+
+
+        this.weerView.getTemp = (city) =>{
+            this.getTemp(city);
+        };
+
+        this.weerView.getTemp("Amsterdam");
 
         this.formView.processPhase1 = (category) => {
             this.item.category = category;
@@ -64,5 +76,9 @@ export default class MagazijnController{
         document.getElementById("tierelantijn").style.display = "none";
     }
 
+    async getTemp(city){
+        let x = await this.Weer.generateJsonFromAPI(city);
+        this.weerView.setTemp(x);
+    }
 
 }
