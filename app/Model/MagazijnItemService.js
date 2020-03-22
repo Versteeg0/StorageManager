@@ -11,9 +11,12 @@ export class MagazijnItemService{
     getItems(category){
         let x = JSON.parse(localStorage.getItem('items'));
         let items = [];
-        for(let i = 0; i < x.length; i++){
-            if(x[i].category === category){
-                items.push(x[i]);
+        console.log(x);
+        if(x != null){
+            for(let i = 0; i < x.length; i++){
+                if(x[i].category === category){
+                    items.push(x[i]);
+                }
             }
         }
         return items;

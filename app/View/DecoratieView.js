@@ -7,11 +7,11 @@ export class DecoratieView{
         this.decoratieContainer.classList.add("container-fluid");
         this.decoratieRow = document.createElement("div");
         this.decoratieRow.classList.add("row");
-        this.grid = document.createElement("div");
-        this.grid.classList.add("dGrid", "col-5")
+
     }
     draw(data){
-
+        this.grid = document.createElement("div");
+        this.grid.classList.add("dGrid", "col-5");
         let header = document.createElement("h2");
         header.innerText = "Decoratie";
         this.decoratieContainer.appendChild(header);
