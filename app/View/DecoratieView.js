@@ -2,12 +2,13 @@ export class DecoratieView{
 
     constructor() {
         this.container = document.getElementById('container');
-        this.decoratieContainer = document.createElement("container");
+        this.decoratieContainer = document.createElement("div");
         this.decoratieContainer.id = "decoratie";
+        this.decoratieContainer.classList.add("container-fluid");
         this.decoratieRow = document.createElement("div");
         this.decoratieRow.classList.add("row");
         this.grid = document.createElement("div");
-        this.grid.classList.add("dGrid", "col-4")
+        this.grid.classList.add("dGrid", "col-5")
     }
     draw(data){
 
@@ -56,15 +57,20 @@ export class DecoratieView{
                 this.dropdownCol.removeChild(oldItem);
             }
            let selectedItem = document.createElement("div");
-           selectedItem.className = "cell";
            selectedItem.id = "selectedDItem";
            selectedItem.draggable = true;
-            selectedItem.addEventListener('dragstart', (event) => {
-                selectedItem.ondragstart = this.onDragStart(event);
-            });
+
            let dropValue = document.createLabel(dropdown.value.substr(0,4));
            dropValue.classList.add("dropValue");
            selectedItem.appendChild(dropValue);
+
+           selectedItem.addEventListener('dragstart', (event) => {
+              selectedItem.ondragstart = this.onDragStart(event);
+           });
+
+            selectedItem.addEventListener('click', () => {
+                alert("hallo");
+            });
 
            this.dropdownCol.appendChild(selectedItem);
         });
@@ -92,17 +98,23 @@ export class DecoratieView{
     }
 
     onDrop(event) {
-        const id = event
-            .dataTransfer
-            .getData('text');
+        if(event.target.classList.contains("holder")){
+            const id = event
+                .dataTransfer
+                .getData('text');
 
-        const draggableElement = document.getElementById(id);
-        const dropzone = event.target;
+            const draggableElement = document.getElementById(id);
+            draggableElement.id = "dropped";
+            draggableElement.draggable = false;
+            const dropzone = event.target;
 
-        dropzone.appendChild(draggableElement);
 
-        event
-            .dataTransfer
-            .clearData();
+            dropzone.appendChild(draggableElement);
+
+            event
+                .dataTransfer
+                .clearData();
+        }
+
     }
 }
