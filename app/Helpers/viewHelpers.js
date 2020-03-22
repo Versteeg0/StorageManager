@@ -32,7 +32,9 @@ document.createInput = function(id, placeholder){
     input.id = id;
     input.placeholder = placeholder;
     return input;
-}
+};
+
+
 
 
 

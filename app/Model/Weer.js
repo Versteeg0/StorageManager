@@ -5,7 +5,6 @@ export class Weer {
     }
 
     generateJsonFromAPI(city) {
-
         return fetch('http://weerlive.nl/api/json-data-10min.php?key=33156b745d&locatie=' + city)
             .then(res => res.json()) //wat denk jij dat dit doet?
             .then(data => {
