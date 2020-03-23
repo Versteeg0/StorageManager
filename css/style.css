@@ -2,7 +2,7 @@
     display: none;
 }
 
-#itemDrop, #selectedDItem,  #selectedKItem, #selectedTItem{
+#itemDrop, .selectedDItem,  .selectedKItem, .selectedTItem{
     margin-left: 400px;
     margin-bottom: 50px;
     width: 300px;

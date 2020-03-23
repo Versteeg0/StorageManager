@@ -5,23 +5,29 @@ export class DecoratieView{
         this.decoratieContainer = document.createElement("div");
         this.decoratieContainer.id = "decoratie";
         this.decoratieContainer.classList.add("container-fluid");
-        this.decoratieRow = document.createElement("div");
-        this.decoratieRow.classList.add("row");
-
+        this.container.appendChild(this.decoratieContainer);
     }
-    draw(data){
-        this.grid = document.createElement("div");
-        this.grid.classList.add("dGrid", "col-5");
+    draw(data, html){
+        while (this.decoratieContainer.hasChildNodes()) {
+            this.decoratieContainer.removeChild(this.decoratieContainer.lastChild);
+        }
         let header = document.createElement("h2");
         header.innerText = "Decoratie";
         this.decoratieContainer.appendChild(header);
-        this.container.appendChild(this.decoratieContainer);
+
+        this.decoratieRow = document.createElement("div");
+        this.decoratieRow.classList.add("row");
+
+        this.grid = document.createElement("div");
+        this.grid.classList.add("dGrid", "col-5");
+
         this.decoratieContainer.appendChild(this.decoratieRow);
         this.makeRow();
         this.makeColumns();
-        this.makeDropDown(data)
 
+        this.makeDropDown(data)
     }
+
     makeRow(){
         this.decoratieRow.appendChild(this.grid);
     }
@@ -35,6 +41,7 @@ export class DecoratieView{
                 });
                 newCell.addEventListener('drop', (event) => {
                     newCell.ondrop = this.onDrop(event);
+                    this.savePage(this.grid.innerHTML);
                 });
                 this.grid.appendChild(newCell);
         }
@@ -52,12 +59,13 @@ export class DecoratieView{
         dropdown.id = "itemDrop";
 
         dropdown.addEventListener('click', () => {
-           let oldItem = document.getElementById("selectedDItem");
+           let oldItem = document.querySelector(".selectedDItem");
             if(oldItem != null){
                 this.dropdownCol.removeChild(oldItem);
             }
            let selectedItem = document.createElement("div");
-           selectedItem.id = "selectedDItem";
+           selectedItem.classList.add("selectedDItem");
+           selectedItem.id = dropdown.value;
            selectedItem.draggable = true;
 
            let dropValue = document.createLabel(dropdown.value.substr(0,4));
@@ -69,7 +77,7 @@ export class DecoratieView{
            });
 
             selectedItem.addEventListener('click', () => {
-                this.showDetails(dropdown.value, this.decoratieContainer);
+                this.showDetails(selectedItem.id, this.decoratieContainer);
             });
 
            this.dropdownCol.appendChild(selectedItem);
@@ -104,7 +112,7 @@ export class DecoratieView{
                 .getData('text');
 
             const draggableElement = document.getElementById(id);
-            draggableElement.id = "dropped";
+            draggableElement.classList.remove("selectedDItem");
             draggableElement.draggable = false;
             const dropzone = event.target;
 
@@ -114,6 +122,6 @@ export class DecoratieView{
                 .dataTransfer
                 .clearData();
         }
-
     }
+
 }

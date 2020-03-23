@@ -8,19 +8,24 @@ import {Weer} from "../Model/Weer.js"
 import {MagazijnItem} from "../Model/MagazijnItem";
 import {MagazijnItemService} from "../Model/MagazijnItemService";
 import {PopupView} from "../View/PopupView";
+import {PageService} from "../Model/PageService";
 
 export default class MagazijnController{
 
     constructor() {
+        this.menuView = new MenuView();
+        this.menuView.createMenu();
+
         this.weerView = new WeerView();
         this.Weer = new Weer();
         this.item = new MagazijnItem();
         this.itemService = new MagazijnItemService();
+        this.pageService = new PageService();
 
         this.popupView = new PopupView();
 
         this.decoratieView = new DecoratieView();
-        this.decoratieItems = this.itemService.getItems("Decoratie");
+
 
         this.kledingView = new KledingView();
         this.kledingItems = this.itemService.getItems("Kleding");
@@ -28,16 +33,13 @@ export default class MagazijnController{
         this.tierelantijnView = new TierelantijnView();
         this.tierelantijnItems = this.itemService.getItems("Tierelantijn");
 
-        this.menuView = new MenuView();
         this.formView = new FormView();
 
-        this.menuView.createMenu();
-        this.decoratieView.draw(this.decoratieItems);
+        this.decoratieView.draw(this.itemService.getItems("Decoratie"), this.pageService.getDecoratiePage());
         this.kledingView.draw(this.kledingItems);
         this.tierelantijnView.draw(this.tierelantijnItems);
         this.formView.createForm();
         this.weerView.generateTable();
-
 
         //Weerview methods
         this.weerView.getTemp = (city) =>{
@@ -74,8 +76,22 @@ export default class MagazijnController{
             }
 
             this.itemService.saveItem(this.item);
+
+            if(this.item.category == "Decoratie"){
+                this.decoratieView.draw(this.itemService.getItems("Decoratie"));
+            }else if(this.item.category == "Kleding"){
+
+            }else{
+
+            }
+
             this.formView.phase1();
             this.item = new MagazijnItem();
+        };
+
+        //Save Pages
+        this.decoratieView.savePage = (data) => {
+          this.pageService.saveDecoratiePage(data);
         };
 
         //Details methods
@@ -85,9 +101,10 @@ export default class MagazijnController{
         };
 
         this.popupView.deleteItem = (data) => {
+            console.log(data);
             this.itemService.deleteItem(data);
             if(data.category == "Decoratie"){
-
+                this.decoratieView.draw(this.itemService.getItems("Decoratie"));
             }else if(data.category == "Kleding"){
 
             }else{
