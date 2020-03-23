@@ -79,6 +79,7 @@ export class FormView{
             this.inputs = [this.naamInput.value, this.beschrijvingInput.value, this.minVoorraadInput.value, this.hVoorraadInput.value]
             this.processPhase2(this.inputs);
         });
+
         this.phase2Form.appendChild(this.phase2Button);
         this.form.appendChild(this.phase2Form);
     }

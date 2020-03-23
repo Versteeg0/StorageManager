@@ -3,7 +3,7 @@ import { MagazijnItem} from "./MagazijnItem";
 export class MagazijnItemService{
 
     saveItem(item){
-        var itemArray = JSON.parse(localStorage.getItem("items") || "[]");
+        let itemArray = JSON.parse(localStorage.getItem("items") || "[]");
         itemArray.push(item);
         localStorage.setItem('items', JSON.stringify(itemArray));
     }
@@ -11,7 +11,6 @@ export class MagazijnItemService{
     getItems(category){
         let x = JSON.parse(localStorage.getItem('items'));
         let items = [];
-        console.log(x);
         if(x != null){
             for(let i = 0; i < x.length; i++){
                 if(x[i].category === category){
@@ -20,5 +19,24 @@ export class MagazijnItemService{
             }
         }
         return items;
+    }
+
+    getItem(data){
+        let x = JSON.parse(localStorage.getItem('items'));
+        let item = null;
+        if(x != null){
+            for(let i = 0; i < x.length; i++){
+                if(x[i].name === data){
+                    item = x[i];
+                }
+            }
+        }
+        return item;
+    }
+
+    deleteItem(data){
+        let itemArray = JSON.parse(localStorage.getItem("items") || "[]");
+        let index = itemArray.indexOf(data);
+        itemArray.splice(index, 1);
     }
 }
