@@ -1,10 +1,10 @@
 export class PopupView{
 
     constructor() {
-        this.handleDetails();
     }
 
-    handleDetails() {
+    handleDetails(data, container) {
+
         //Popup group
         let popup = document.createElement("div");
         popup.id = "popup";
@@ -21,17 +21,21 @@ export class PopupView{
 
         let backbutton = document.createElement("button");
         backbutton.id = "backbutton";
-        backbutton.dataset = data-close-button;
         backbutton.classList.add("close-button");
-        backbutton.innerText = "&times;";
+        backbutton.innerText = 'X';
+
+        backbutton.addEventListener('click', () => {
+           container.removeChild(popup);
+           container.removeChild(overlay);
+        });
 
         popupHeader.appendChild(headerTitle);
         popupHeader.appendChild(backbutton);
 
         //Body group
         let popupBody= document.createElement("div")
-        popupHeader.id = "popup-body";
-        popupHeader.innerText = "Body";
+        popupBody.id = "popup-body";
+        popupBody.innerText = data.name;
 
         let overlay = document.createElement("div");
         overlay.id = "overlay";
@@ -39,10 +43,17 @@ export class PopupView{
         let deletebutton = document.createElement("button");
         deletebutton.id = "deletebutton";
         deletebutton.innerText = "Delete";
+        deletebutton.addEventListener('click', () =>{
+            container.removeChild(popup);
+            container.removeChild(overlay);
+            this.deleteItem(data);
+        });
+        popupBody.appendChild(deletebutton);
 
         popup.appendChild(popupHeader);
         popup.appendChild(popupBody);
-        popup.appendChild(overlay);
-        popup.appendChild()
+
+        container.appendChild(overlay);
+        container.appendChild(popup);
     }
 }

@@ -7,6 +7,7 @@ import {WeerView} from "../View/WeerView";
 import {Weer} from "../Model/Weer.js"
 import {MagazijnItem} from "../Model/MagazijnItem";
 import {MagazijnItemService} from "../Model/MagazijnItemService";
+import {PopupView} from "../View/PopupView";
 
 export default class MagazijnController{
 
@@ -15,6 +16,8 @@ export default class MagazijnController{
         this.Weer = new Weer();
         this.item = new MagazijnItem();
         this.itemService = new MagazijnItemService();
+
+        this.popupView = new PopupView();
 
         this.decoratieView = new DecoratieView();
         this.decoratieItems = this.itemService.getItems("Decoratie");
@@ -36,6 +39,7 @@ export default class MagazijnController{
         this.weerView.generateTable();
 
 
+        //Weerview methods
         this.weerView.getTemp = (city) =>{
             this.getTemp(city);
         };
@@ -47,6 +51,8 @@ export default class MagazijnController{
             this.formView.phase2()
         };
 
+
+        //Form methods
         this.formView.processPhase2 = (data) => {
             this.item.name = data[0];
             this.item.description = data[1];
@@ -70,6 +76,23 @@ export default class MagazijnController{
             this.itemService.saveItem(this.item);
             this.formView.phase1();
             this.item = new MagazijnItem();
+        };
+
+        //Details methods
+        this.decoratieView.showDetails = (data, container) => {
+            let item = this.itemService.getItem(data);
+            this.popupView.handleDetails(item, container);
+        };
+
+        this.popupView.deleteItem = (data) => {
+            this.itemService.deleteItem(data);
+            if(data.category == "Decoratie"){
+
+            }else if(data.category == "Kleding"){
+
+            }else{
+
+            }
         };
 
         document.getElementById("kleding").style.display = "none";

@@ -69,7 +69,7 @@ export class DecoratieView{
            });
 
             selectedItem.addEventListener('click', () => {
-                alert("hallo");
+                this.showDetails(dropdown.value, this.decoratieContainer);
             });
 
            this.dropdownCol.appendChild(selectedItem);
@@ -107,7 +107,6 @@ export class DecoratieView{
             draggableElement.id = "dropped";
             draggableElement.draggable = false;
             const dropzone = event.target;
-
 
             dropzone.appendChild(draggableElement);
 
