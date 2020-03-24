@@ -28,7 +28,6 @@ export class DecoratieView{
             this.decoratieRow.appendChild(this.grid);
         }else{
             this.makeRow();
-            this.makeColumns();
         }
         this.makeDropDown(data);
         this.makeGarbageCan();
@@ -36,17 +35,11 @@ export class DecoratieView{
     }
 
     makeRow(){
-        this.decoratieRow.appendChild(this.grid);
+        this.grid = document.createCells(this.grid);
+        this.decoratieRow.appendChild();
     }
 
-    makeColumns(){
-        for (let i = 0; i < 225; i++) {
-                let newCell = document.createElement("div");
-                newCell.id = "cell";
-                newCell.classList.add("holder", "cell");
-                this.grid.appendChild(newCell);
-        }
-    }
+
 
     makeDropDown(data){
         let array = [];
@@ -131,8 +124,6 @@ export class DecoratieView{
         const draggableElement = document.getElementById(id);
         if(draggableElement != null){
             if(event.target.classList.contains("holder")){
-
-
                     if(draggableElement.className == "selectedDItem"){
                         draggableElement.classList.remove("selectedDItem");
                     }

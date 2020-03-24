@@ -26,7 +26,6 @@ export default class MagazijnController{
 
         this.decoratieView = new DecoratieView();
 
-
         this.kledingView = new KledingView();
         this.kledingItems = this.itemService.getItems("Kleding");
 

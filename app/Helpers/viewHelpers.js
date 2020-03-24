@@ -34,6 +34,16 @@ document.createInput = function(id, placeholder){
     return input;
 };
 
+document.createCells = function (grid){
+    for (let i = 0; i < 225; i++) {
+        let newCell = document.createElement("div");
+        newCell.id = "cell";
+        newCell.classList.add("holder", "cell");
+        grid.appendChild(newCell);
+    }
+    return grid;
+};
+
 
 
 
