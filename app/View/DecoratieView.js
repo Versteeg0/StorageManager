@@ -7,6 +7,7 @@ export class DecoratieView{
         this.decoratieContainer.classList.add("container-fluid");
         this.container.appendChild(this.decoratieContainer);
     }
+
     draw(data, html){
         while (this.decoratieContainer.hasChildNodes()) {
             this.decoratieContainer.removeChild(this.decoratieContainer.lastChild);
@@ -17,15 +18,21 @@ export class DecoratieView{
 
         this.decoratieRow = document.createElement("div");
         this.decoratieRow.classList.add("row");
-
         this.grid = document.createElement("div");
         this.grid.classList.add("dGrid", "col-5");
-
         this.decoratieContainer.appendChild(this.decoratieRow);
-        this.makeRow();
-        this.makeColumns();
 
-        this.makeDropDown(data)
+        if(html != null){
+            this.grid.innerHTML = html;
+
+            this.decoratieRow.appendChild(this.grid);
+        }else{
+            this.makeRow();
+            this.makeColumns();
+        }
+        this.makeDropDown(data);
+        this.makeGarbageCan();
+
     }
 
     makeRow(){
@@ -35,14 +42,8 @@ export class DecoratieView{
     makeColumns(){
         for (let i = 0; i < 225; i++) {
                 let newCell = document.createElement("div");
+                newCell.id = "cell";
                 newCell.classList.add("holder", "cell");
-                newCell.addEventListener('dragover', (event) => {
-                    newCell.ondragover = this.onDragOver(event);
-                });
-                newCell.addEventListener('drop', (event) => {
-                    newCell.ondrop = this.onDrop(event);
-                    this.savePage(this.grid.innerHTML);
-                });
                 this.grid.appendChild(newCell);
         }
     }
@@ -53,22 +54,22 @@ export class DecoratieView{
            array.push(data[i].name)
         }
         this.dropdownCol = document.createElement("div");
-        this.dropdownCol.classList.add("col-4")
+        this.dropdownCol.classList.add("col-4");
 
-        let dropdown = document.createSelect(array);
-        dropdown.id = "itemDrop";
+        this.dropdown = document.createSelect(array);
+        this.dropdown.id = "itemDrop";
 
-        dropdown.addEventListener('click', () => {
+        this.dropdown.addEventListener('click', () => {
            let oldItem = document.querySelector(".selectedDItem");
             if(oldItem != null){
                 this.dropdownCol.removeChild(oldItem);
             }
            let selectedItem = document.createElement("div");
            selectedItem.classList.add("selectedDItem");
-           selectedItem.id = dropdown.value;
+           selectedItem.id = this.dropdown.value;
            selectedItem.draggable = true;
 
-           let dropValue = document.createLabel(dropdown.value.substr(0,4));
+           let dropValue = document.createLabel(this.dropdown.value.substr(0,4));
            dropValue.classList.add("dropValue");
            selectedItem.appendChild(dropValue);
 
@@ -83,8 +84,25 @@ export class DecoratieView{
            this.dropdownCol.appendChild(selectedItem);
         });
 
-        this.dropdownCol.appendChild(dropdown);
+        this.dropdownCol.appendChild(this.dropdown);
         this.decoratieRow.appendChild(this.dropdownCol);
+    }
+
+    makeGarbageCan(){
+        this.garbageCan = document.createElement("div");
+        this.garbageCan.classList.add("garbage");
+        this.garbageCan.innerHTML = "Prullenbak";
+
+        this.garbageCan.addEventListener('dragover', (event) => {
+            this.garbageCan.ondragover = this.onDragOver(event);
+        });
+
+        this.garbageCan.addEventListener('drop', (event) => {
+            this.garbageCan.ondrop = this.onDrop(event);
+            this.savePage(this.grid.innerHTML);
+        });
+
+        this.dropdownCol.appendChild(this.garbageCan);
     }
 
     onDragStart(event) {
@@ -106,22 +124,57 @@ export class DecoratieView{
     }
 
     onDrop(event) {
-        if(event.target.classList.contains("holder")){
-            const id = event
-                .dataTransfer
-                .getData('text');
+        const id = event
+            .dataTransfer
+            .getData('text');
 
-            const draggableElement = document.getElementById(id);
-            draggableElement.classList.remove("selectedDItem");
-            draggableElement.draggable = false;
-            const dropzone = event.target;
+        const draggableElement = document.getElementById(id);
+        if(draggableElement != null){
+            if(event.target.classList.contains("holder")){
 
-            dropzone.appendChild(draggableElement);
 
-            event
-                .dataTransfer
-                .clearData();
+                    if(draggableElement.className == "selectedDItem"){
+                        draggableElement.classList.remove("selectedDItem");
+                    }
+                    draggableElement.classList.add("dropped");
+                    const dropzone = event.target;
+
+                    dropzone.appendChild(draggableElement);
+                    this.dropdown.removeAttribute(draggableElement.name);
+                    event
+                        .dataTransfer
+                        .clearData();
+            }else if(event.target.classList.contains("garbage")){
+                this.garbageCan.appendChild(draggableElement);
+                this.garbageCan.removeChild(draggableElement);
+            }
         }
     }
+
+    eventListeners(){
+        let cells = document.querySelectorAll('#cell');
+        for (let i = 0; i < cells.length; i++) {
+            cells[i].addEventListener('dragover', (event) => {
+                cells[i].ondragover = this.onDragOver(event);
+            });
+
+            cells[i].addEventListener('drop', (event) => {
+                cells[i].ondrop = this.onDrop(event);
+                this.savePage(this.grid.innerHTML);
+            });
+        }
+
+        let dropped = document.querySelectorAll('.dropped');
+        for (let i = 0; i < dropped.length; i++) {
+            dropped[i].addEventListener('click', () => {
+                this.showDetails(dropped[i].id, this.decoratieContainer);
+            });
+
+            dropped[i].addEventListener('dragstart', (event) => {
+                dropped[i].ondragstart = this.onDragStart(event);
+            });
+        }
+    }
+
 
 }

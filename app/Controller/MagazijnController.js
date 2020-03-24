@@ -35,10 +35,12 @@ export default class MagazijnController{
 
         this.formView = new FormView();
 
-        this.decoratieView.draw(this.itemService.getItems("Decoratie"), this.pageService.getDecoratiePage());
+        this.drawPages();
+
         this.kledingView.draw(this.kledingItems);
         this.tierelantijnView.draw(this.tierelantijnItems);
         this.formView.createForm();
+
         this.weerView.generateTable();
 
         //Weerview methods
@@ -77,13 +79,7 @@ export default class MagazijnController{
 
             this.itemService.saveItem(this.item);
 
-            if(this.item.category == "Decoratie"){
-                this.decoratieView.draw(this.itemService.getItems("Decoratie"));
-            }else if(this.item.category == "Kleding"){
-
-            }else{
-
-            }
+            this.drawPages();
 
             this.formView.phase1();
             this.item = new MagazijnItem();
@@ -101,15 +97,8 @@ export default class MagazijnController{
         };
 
         this.popupView.deleteItem = (data) => {
-            console.log(data);
             this.itemService.deleteItem(data);
-            if(data.category == "Decoratie"){
-                this.decoratieView.draw(this.itemService.getItems("Decoratie"));
-            }else if(data.category == "Kleding"){
-
-            }else{
-
-            }
+            this.drawPages();
         };
 
         document.getElementById("kleding").style.display = "none";
@@ -119,6 +108,11 @@ export default class MagazijnController{
     async getTemp(city){
         let x = await this.Weer.generateJsonFromAPI(city);
         this.weerView.setTemp(x);
+    }
+
+    drawPages(){
+        this.decoratieView.draw(this.itemService.getItems("Decoratie"), this.pageService.getDecoratiePage());
+        this.decoratieView.eventListeners();
     }
 
 }
