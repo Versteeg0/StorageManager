@@ -6,10 +6,19 @@ document.createButton = function(name, text){
     return button;
 }
 
-document.createLabel = function(text){
+document.createLabel = function(text, newLine) {
+    let labelDiv = document.createElement("div");
     let label = document.createElement("label");
     label.innerText = text;
-    return label;
+    if (newLine == true) {
+        let br = document.createElement("br");
+        labelDiv.appendChild(label);
+        labelDiv.appendChild(br);
+        return labelDiv
+    } else {
+        labelDiv.appendChild(label);
+        return labelDiv;
+    }
 }
 
 

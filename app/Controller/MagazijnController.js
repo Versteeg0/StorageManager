@@ -95,6 +95,14 @@ export default class MagazijnController{
             this.popupView.handleDetails(item, container);
         };
 
+        this.popupView.addExtraItem = (id, extra) => {
+            let item = this.itemService.getItem(id);
+            item.extra = extra;
+            console.log(item);
+            this.itemService.saveItem(item);
+            this.drawPages();
+        };
+
         this.popupView.deleteItem = (data) => {
             this.itemService.deleteItem(data);
             this.drawPages();
