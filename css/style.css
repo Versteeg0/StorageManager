@@ -2,7 +2,7 @@
     display: none;
 }
 
-#itemDrop, #selectedDItem,  #selectedKItem, #selectedTItem{
+#itemDrop, .selectedDItem,  .selectedKItem, .selectedTItem{
     margin-left: 400px;
     margin-bottom: 50px;
     width: 300px;
@@ -41,6 +41,12 @@
     font-size: 30px;
 }
 
+.garbage{
+    border: 1px solid rgba(0, 0, 0, 0.8);
+    max-width: 100px;
+    min-height: 50px;
+}
+
 #weerDiv {
     position: absolute;
     background: whitesmoke;
@@ -68,10 +74,6 @@
     min-height: 300px;
     max-width: 80%;
     transform: translate(-50%, -50%) scale(1);
-}
-
-#popup-active {
-
 }
 
 #popup-header {
@@ -105,10 +107,6 @@
     background-color: rgba(0, 0, 0, .5);
     opacity: 1;
     pointer-events: all;
-}
-
-#popupFooter {
-    padding: 10px 15px;
 }
 
 
