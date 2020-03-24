@@ -71,9 +71,11 @@ export class PopupView{
                 let Default = "default";
         }
 
-
-        popupBody.appendChild(document.createElement("br"));
-
+        console.log(data.extra);
+        if(data.extra != null) {
+            let extra = document.createLabel("Extra: " + data.extra, true);
+            popupBody.appendChild(extra);
+        }
         //Footer buttons
         let popupFooter = document.createElement("div");
         popupFooter.id = 'popupFooter';

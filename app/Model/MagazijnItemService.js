@@ -4,6 +4,13 @@ export class MagazijnItemService{
 
     saveItem(item){
         let itemArray = JSON.parse(localStorage.getItem("items") || "[]");
+
+        for(let i = 0; i < itemArray.length; i++) {
+            if(itemArray[i].name == item.name) {
+                itemArray.splice(itemArray[i], 1);
+            }
+        }
+
         itemArray.push(item);
         localStorage.setItem('items', JSON.stringify(itemArray));
     }
