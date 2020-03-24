@@ -107,8 +107,8 @@
     pointer-events: all;
 }
 
-#overlay.active {
-
+#popupFooter {
+    padding: 10px 15px;
 }
 
 
