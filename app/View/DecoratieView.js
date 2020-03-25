@@ -2,9 +2,7 @@ export class DecoratieView{
 
     constructor() {
         this.container = document.getElementById('container');
-        this.decoratieContainer = document.createElement("div");
-        this.decoratieContainer.id = "decoratie";
-        this.decoratieContainer.classList.add("container-fluid");
+        this.decoratieContainer = document.createPageContainer("decoratie");
         this.container.appendChild(this.decoratieContainer);
     }
 
@@ -28,7 +26,6 @@ export class DecoratieView{
             this.decoratieRow.appendChild(this.grid);
         }else{
             this.makeRow();
-            this.makeColumns();
         }
         this.makeDropDown(data);
         this.makeGarbageCan();
@@ -36,16 +33,8 @@ export class DecoratieView{
     }
 
     makeRow(){
+        this.grid = document.createCells(this.grid);
         this.decoratieRow.appendChild(this.grid);
-    }
-
-    makeColumns(){
-        for (let i = 0; i < 225; i++) {
-                let newCell = document.createElement("div");
-                newCell.id = "cell";
-                newCell.classList.add("holder", "cell");
-                this.grid.appendChild(newCell);
-        }
     }
 
     makeDropDown(data){
@@ -89,19 +78,14 @@ export class DecoratieView{
     }
 
     makeGarbageCan(){
-        this.garbageCan = document.createElement("div");
-        this.garbageCan.classList.add("garbage");
-        this.garbageCan.innerHTML = "Prullenbak";
-
+        this.garbageCan = document.createGarbage();
         this.garbageCan.addEventListener('dragover', (event) => {
             this.garbageCan.ondragover = this.onDragOver(event);
         });
-
         this.garbageCan.addEventListener('drop', (event) => {
             this.garbageCan.ondrop = this.onDrop(event);
             this.savePage(this.grid.innerHTML);
         });
-
         this.dropdownCol.appendChild(this.garbageCan);
     }
 
@@ -131,8 +115,6 @@ export class DecoratieView{
         const draggableElement = document.getElementById(id);
         if(draggableElement != null){
             if(event.target.classList.contains("holder")){
-
-
                     if(draggableElement.className == "selectedDItem"){
                         draggableElement.classList.remove("selectedDItem");
                     }
@@ -175,6 +157,4 @@ export class DecoratieView{
             });
         }
     }
-
-
 }

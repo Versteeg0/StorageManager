@@ -31,7 +31,6 @@ document.createSelect = function(array){
         option.innerText = array[i];
         multi.appendChild(option);
     }
-
     return multi;
 }
 
@@ -43,7 +42,30 @@ document.createInput = function(id, placeholder){
     return input;
 };
 
+document.createCells = function (grid){
+    for (let i = 0; i < 225; i++) {
+        let newCell = document.createElement("div");
+        newCell.id = "cell";
+        newCell.classList.add("holder", "cell");
+        grid.appendChild(newCell);
+    }
+    return grid;
+};
 
+document.createPageContainer = function(id){
+    let container = document.createElement("div");
+    container.id = id;
+    container.classList.add("container-fluid");
+    return container;
+};
+
+document.createGarbage = function(){
+    let garbageCan = document.createElement("div");
+    garbageCan.classList.add("garbage");
+    garbageCan.innerHTML = "Prullenbak";
+
+    return garbageCan;
+};
 
 
 
