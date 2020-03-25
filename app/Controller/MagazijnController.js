@@ -18,26 +18,20 @@ export default class MagazijnController{
 
         this.weerView = new WeerView();
         this.Weer = new Weer();
+
         this.item = new MagazijnItem();
         this.itemService = new MagazijnItemService();
+
         this.pageService = new PageService();
 
         this.popupView = new PopupView();
-
         this.decoratieView = new DecoratieView();
-
         this.kledingView = new KledingView();
-        this.kledingItems = this.itemService.getItems("Kleding");
-
         this.tierelantijnView = new TierelantijnView();
-        this.tierelantijnItems = this.itemService.getItems("Tierelantijn");
-
         this.formView = new FormView();
 
         this.drawPages();
 
-        this.kledingView.draw(this.kledingItems);
-        this.tierelantijnView.draw(this.tierelantijnItems);
         this.formView.createForm();
 
         this.weerView.generateTable();
@@ -49,13 +43,12 @@ export default class MagazijnController{
 
         this.weerView.getTemp("Amsterdam");
 
+        //Form methods
         this.formView.processPhase1 = (category) => {
             this.item.category = category;
             this.formView.phase2()
         };
 
-
-        //Form methods
         this.formView.processPhase2 = (data) => {
             this.item.name = data[0];
             this.item.description = data[1];
@@ -89,8 +82,26 @@ export default class MagazijnController{
           this.pageService.saveDecoratiePage(data);
         };
 
+        this.kledingView.savePage = (data) => {
+            this.pageService.saveKledingPage(data);
+        };
+
+        this.tierelantijnView.savePage = (data) => {
+            this.pageService.saveTierelantijnPage(data);
+        };
+
         //Details methods
         this.decoratieView.showDetails = (data, container) => {
+            let item = this.itemService.getItem(data);
+            this.popupView.handleDetails(item, container);
+        };
+
+        this.kledingView.showDetails = (data, container) => {
+            let item = this.itemService.getItem(data);
+            this.popupView.handleDetails(item, container);
+        };
+
+        this.tierelantijnView.showDetails = (data, container) => {
             let item = this.itemService.getItem(data);
             this.popupView.handleDetails(item, container);
         };
@@ -98,15 +109,14 @@ export default class MagazijnController{
         this.popupView.addExtraItem = (id, extra) => {
             let item = this.itemService.getItem(id);
             item.extra = extra;
-            console.log(item);
             this.itemService.saveItem(item);
             this.drawPages();
         };
 
-        this.popupView.deleteItem = (data) => {
+/*        this.popupView.deleteItem = (data) => {
             this.itemService.deleteItem(data);
             this.drawPages();
-        };
+        };*/
 
         document.getElementById("kleding").style.display = "none";
         document.getElementById("tierelantijn").style.display = "none";
@@ -120,6 +130,12 @@ export default class MagazijnController{
     drawPages(){
         this.decoratieView.draw(this.itemService.getItems("Decoratie"), this.pageService.getDecoratiePage());
         this.decoratieView.eventListeners();
+
+        this.kledingView.draw(this.itemService.getItems("Kleding"), this.pageService.getKledingPage());
+        this.kledingView.eventListeners();
+
+        this.tierelantijnView.draw(this.itemService.getItems("Tierelantijn"), this.pageService.getTierelantijnPage());
+        this.tierelantijnView.eventListeners();
     }
 
 }

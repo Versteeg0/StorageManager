@@ -31,7 +31,6 @@ document.createSelect = function(array){
         option.innerText = array[i];
         multi.appendChild(option);
     }
-
     return multi;
 }
 
@@ -53,7 +52,20 @@ document.createCells = function (grid){
     return grid;
 };
 
+document.createPageContainer = function(id){
+    let container = document.createElement("div");
+    container.id = id;
+    container.classList.add("container-fluid");
+    return container;
+};
 
+document.createGarbage = function(){
+    let garbageCan = document.createElement("div");
+    garbageCan.classList.add("garbage");
+    garbageCan.innerHTML = "Prullenbak";
+
+    return garbageCan;
+};
 
 
 

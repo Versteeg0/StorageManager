@@ -2,9 +2,7 @@ export class DecoratieView{
 
     constructor() {
         this.container = document.getElementById('container');
-        this.decoratieContainer = document.createElement("div");
-        this.decoratieContainer.id = "decoratie";
-        this.decoratieContainer.classList.add("container-fluid");
+        this.decoratieContainer = document.createPageContainer("decoratie");
         this.container.appendChild(this.decoratieContainer);
     }
 
@@ -36,10 +34,8 @@ export class DecoratieView{
 
     makeRow(){
         this.grid = document.createCells(this.grid);
-        this.decoratieRow.appendChild();
+        this.decoratieRow.appendChild(this.grid);
     }
-
-
 
     makeDropDown(data){
         let array = [];
@@ -82,19 +78,14 @@ export class DecoratieView{
     }
 
     makeGarbageCan(){
-        this.garbageCan = document.createElement("div");
-        this.garbageCan.classList.add("garbage");
-        this.garbageCan.innerHTML = "Prullenbak";
-
+        this.garbageCan = document.createGarbage();
         this.garbageCan.addEventListener('dragover', (event) => {
             this.garbageCan.ondragover = this.onDragOver(event);
         });
-
         this.garbageCan.addEventListener('drop', (event) => {
             this.garbageCan.ondrop = this.onDrop(event);
             this.savePage(this.grid.innerHTML);
         });
-
         this.dropdownCol.appendChild(this.garbageCan);
     }
 
@@ -166,6 +157,4 @@ export class DecoratieView{
             });
         }
     }
-
-
 }
