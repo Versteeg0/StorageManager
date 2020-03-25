@@ -22,8 +22,7 @@ export class TierelantijnView{
 
         if(html != null){
             this.grid.innerHTML = html;
-
-            this.decoratieRow.appendChild(this.grid);
+            this.tierelantijnRow.appendChild(this.grid);
         }else{
             this.makeRow();
         }
