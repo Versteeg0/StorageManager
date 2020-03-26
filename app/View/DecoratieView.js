@@ -58,8 +58,8 @@ export class DecoratieView{
            selectedItem.id = this.dropdown.value;
            selectedItem.draggable = true;
 
-           let dropValue = document.createLabel(this.dropdown.value.substr(0,4));
-           dropValue.classList.add("dropValue");
+           let dropValue = document.createElement("label");
+           dropValue.innerText = this.dropdown.value.substr(0,4);
            selectedItem.appendChild(dropValue);
 
            selectedItem.addEventListener('dragstart', (event) => {
@@ -117,10 +117,9 @@ export class DecoratieView{
             if(event.target.classList.contains("holder")){
                     if(draggableElement.className == "selectedDItem"){
                         draggableElement.classList.remove("selectedDItem");
+                        draggableElement.classList.add("dDropped");
                     }
-                    draggableElement.classList.add("dropped");
                     const dropzone = event.target;
-
                     dropzone.appendChild(draggableElement);
                     this.dropdown.removeAttribute(draggableElement.name);
                     event
@@ -146,7 +145,7 @@ export class DecoratieView{
             });
         }
 
-        let dropped = document.querySelectorAll('.dropped');
+        let dropped = document.querySelectorAll('.dDropped');
         for (let i = 0; i < dropped.length; i++) {
             dropped[i].addEventListener('click', () => {
                 this.showDetails(dropped[i].id, this.decoratieContainer);
