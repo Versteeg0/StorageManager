@@ -1,4 +1,4 @@
-export class PopupView{
+export class PopupView {
 
     constructor() {
     }
@@ -11,7 +11,7 @@ export class PopupView{
         popup.classList.add("popup");
 
         //Header group
-        let popupHeader = document.createElement("div")
+        let popupHeader = document.createElement("div");
         popupHeader.id = "popup-header";
 
         let headerTitle = document.createElement("div");
@@ -25,15 +25,15 @@ export class PopupView{
         backbutton.classList.add("close-button");
 
         backbutton.addEventListener('click', () => {
-           container.removeChild(popup);
-           container.removeChild(overlay);
+            container.removeChild(popup);
+            container.removeChild(overlay);
         });
 
         popupHeader.appendChild(headerTitle);
         popupHeader.appendChild(backbutton);
 
         //Body group
-        let popupBody= document.createElement("div")
+        let popupBody = document.createElement("div");
         popupBody.id = "popup-body";
 
         //Body children
@@ -45,7 +45,7 @@ export class PopupView{
         popupBody.appendChild(minimalSupply);
         popupBody.appendChild(currentSupply);
 
-        switch(data.category) {
+        switch (data.category) {
             case "Decoratie" :
                 let sizeInCm = document.createLabel("Grootte van product: " + data.size, true);
                 let dColor = document.createLabel("Kleur van de Decoratie: " + data.color, true);
@@ -71,18 +71,20 @@ export class PopupView{
                 let Default = "default";
         }
 
-        console.log(data.extra);
-        if(data.extra != null) {
+        if (data.extra != null) {
             let extra = document.createLabel("Extra: " + data.extra, true);
             popupBody.appendChild(extra);
         }
+
+
+
         //Footer buttons
         let popupFooter = document.createElement("div");
         popupFooter.id = 'popupFooter';
 
         let extraVeldButton = document.createButton("button", "Extra veld");
         let inputCounter = false;
-        extraVeldButton.addEventListener('click', () =>{
+        extraVeldButton.addEventListener('click', () => {
             if (inputCounter === false) {
                 this.extraFieldsButton();
                 inputCounter = true;
@@ -95,9 +97,62 @@ export class PopupView{
             let extraVeld = document.createLabel(this.extra.value, true);
             popupBody.appendChild(extraVeld);
         });
-
+        let br1 = document.createElement("br");
         popupFooter.appendChild(extraVeldButton);
         popupFooter.appendChild(opslaanButton);
+        popupFooter.appendChild(br1);
+
+        //Image upload / canvas
+        let canvas = document.createElement("canvas");
+
+
+        let image = new Image();
+        image.id = "empty";
+        if(data.photo != "undefined"){
+            image.onload = function () {
+                canvas.width = image.width;
+                canvas.length = image.length;
+                this.context = canvas.getContext("2d");
+                this.context.drawImage(image, 0, 0, image.width, image.height);
+                image.id = "filled";
+            };
+
+            image.src = data.photo
+        }
+
+        let br = document.createElement("br");
+        let br2 = document.createElement("br");
+
+        let uploadButton = document.createElement("input");
+        uploadButton.type = "file";
+        uploadButton.accept = "image/*";
+        uploadButton.id = "file";
+
+        let reader = new FileReader();
+
+        reader.onload = e => {
+            image.src = e.target.result;
+        };
+
+        uploadButton.addEventListener('change', e => {
+            const f = e.target.files[0];
+            if (f instanceof Blob) {
+                reader.readAsDataURL(f);
+            }
+        });
+
+        let saveImage = document.createButton("saveImage", "Foto opslaan");
+        saveImage.addEventListener('click', () => {
+            if(image.id == "filled"){
+                this.saveImage(data.name, image.src);
+            }
+        });
+
+        popupFooter.appendChild(uploadButton);
+        popupFooter.appendChild(br);
+        popupFooter.appendChild(canvas);
+        popupFooter.appendChild(br2);
+        popupFooter.appendChild(saveImage);
 
         let overlay = document.createElement("div");
         overlay.id = "overlay";
@@ -115,4 +170,13 @@ export class PopupView{
         this.extra = document.createInput("extra", "Geef het een waarded");
         newFields.appendChild(this.extra);
     }
+
+    //DRAW ON CANVAS
+
+
+
+
+
+
+
 }

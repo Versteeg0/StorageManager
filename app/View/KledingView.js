@@ -121,7 +121,6 @@ export class KledingView{
                 }
                 draggableElement.classList.add("dropped");
                 const dropzone = event.target;
-                console.log(draggableElement);
                 dropzone.appendChild(draggableElement);
                 this.dropdown.removeAttribute(draggableElement.name);
                 event

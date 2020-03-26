@@ -113,10 +113,12 @@ export default class MagazijnController{
             this.drawPages();
         };
 
-/*        this.popupView.deleteItem = (data) => {
-            this.itemService.deleteItem(data);
+        this.popupView.saveImage = (id, image) => {
+            let item = this.itemService.getItem(id);
+            item.photo = image;
+            this.itemService.saveItem(item);
             this.drawPages();
-        };*/
+        };
 
         document.getElementById("kleding").style.display = "none";
         document.getElementById("tierelantijn").style.display = "none";
