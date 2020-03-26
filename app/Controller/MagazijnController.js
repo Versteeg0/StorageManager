@@ -68,11 +68,8 @@ export default class MagazijnController{
             }else{
                 this.item.weight = data.weight;
             }
-
             this.itemService.saveItem(this.item);
-
             this.drawPages();
-
             this.formView.phase1();
             this.item = new MagazijnItem();
         };

@@ -56,8 +56,8 @@ export class TierelantijnView{
             selectedItem.id = this.dropdown.value;
             selectedItem.draggable = true;
 
-            let dropValue = document.createLabel(this.dropdown.value.substr(0,4));
-            dropValue.classList.add("dropValue");
+            let dropValue = document.createElement("label");
+            dropValue.innerText = this.dropdown.value.substr(0,4);
             selectedItem.appendChild(dropValue);
 
             selectedItem.addEventListener('dragstart', (event) => {
@@ -115,10 +115,9 @@ export class TierelantijnView{
             if(event.target.classList.contains("holder")){
                 if(draggableElement.className == "selectedTItem"){
                     draggableElement.classList.remove("selectedTItem");
+                    draggableElement.classList.add("tDropped");
                 }
-                draggableElement.classList.add("dropped");
                 const dropzone = event.target;
-                console.log(draggableElement);
                 dropzone.appendChild(draggableElement);
                 this.dropdown.removeAttribute(draggableElement.name);
                 event
@@ -144,7 +143,7 @@ export class TierelantijnView{
             });
         }
 
-        let dropped = document.querySelectorAll('.dropped');
+        let dropped = document.querySelectorAll('.tDropped');
         for (let i = 0; i < dropped.length; i++) {
             dropped[i].addEventListener('click', () => {
                 this.showDetails(dropped[i].id, this.tierelantijnContainer);
