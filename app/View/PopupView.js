@@ -104,14 +104,17 @@ export class PopupView {
 
         //Image upload / canvas
         let canvas = document.createElement("canvas");
+        canvas.id = 'canvas';
+        canvas.width = 500;
+        canvas.height = 500;
 
 
         let image = new Image();
         image.id = "empty";
         if(data.photo != "undefined"){
             image.onload = function () {
-                canvas.width = image.width;
-                canvas.length = image.length;
+                image.width = canvas.width;
+                image.height = canvas.height;
                 this.context = canvas.getContext("2d");
                 this.context.drawImage(image, 0, 0, image.width, image.height);
                 image.id = "filled";
