@@ -77,7 +77,6 @@ export class PopupView {
         }
 
 
-
         //Footer buttons
         let popupFooter = document.createElement("div");
         popupFooter.id = 'popupFooter';
@@ -108,19 +107,18 @@ export class PopupView {
         canvas.width = 500;
         canvas.height = 500;
 
-
         let image = new Image();
         image.id = "empty";
-        if(data.photo != "undefined"){
-            image.onload = function () {
-                image.width = canvas.width;
-                image.height = canvas.height;
-                this.context = canvas.getContext("2d");
-                this.context.drawImage(image, 0, 0, image.width, image.height);
-                image.id = "filled";
-            };
-
+        if (data.photo != undefined) {
             image.src = data.photo
+        }
+
+        image.onload = function () {
+            image.width = canvas.width;
+            image.height = canvas.height;
+            this.context = canvas.getContext("2d");
+            this.context.drawImage(image, 0, 0, image.width, image.height);
+            image.id = "filled";
         }
 
         let br = document.createElement("br");
@@ -146,7 +144,7 @@ export class PopupView {
 
         let saveImage = document.createButton("saveImage", "Foto opslaan");
         saveImage.addEventListener('click', () => {
-            if(image.id == "filled"){
+            if (image.id == "filled") {
                 this.saveImage(data.name, image.src);
             }
         });
@@ -173,13 +171,4 @@ export class PopupView {
         this.extra = document.createInput("extra", "Geef het een waarded");
         newFields.appendChild(this.extra);
     }
-
-    //DRAW ON CANVAS
-
-
-
-
-
-
-
 }
