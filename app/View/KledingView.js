@@ -33,7 +33,7 @@ export class KledingView{
     }
 
     makeRow(){
-        this.grid = document.createCells(this.grid);
+        this.grid = document.createCells(this.grid, 2);
         this.kledingRow.appendChild(this.grid);
     }
 
@@ -72,8 +72,6 @@ export class KledingView{
 
             this.dropdownCol.appendChild(selectedItem);
         });
-
-
         this.dropdownCol.appendChild(this.dropdown);
         this.kledingRow.appendChild(this.dropdownCol);
     }

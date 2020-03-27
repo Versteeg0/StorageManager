@@ -72,11 +72,34 @@ document.createPopUpValue = function(labelvalue, inputID, value, isNumber){
     return div;
 }
 
-document.createCells = function (grid, pattern){
+document.createCells = function (grid, choice){
     for (let i = 0; i < 225; i++) {
         let newCell = document.createElement("div");
-        newCell.id = "cell";
-        newCell.classList.add("holder", "cell");
+        if(choice === 1) {
+            if (counter > 14 && counter < 30 || counter > 84 && counter < 90 || counter === 200) {
+                newCell.innerText = "X";
+            } else {
+                newCell.id = "cell";
+                newCell.classList.add("holder");
+            }
+        }
+        else if (choice === 2) {
+            if (counter === 56 || counter === 112 || counter === 168 || counter === 205) {
+                newCell.innerText = "X";
+            } else {
+                newCell.id = "cell";
+                newCell.classList.add("holder");
+            }
+        }
+        else {
+            if (counter > 60 && counter < 100 || counter > 150 && counter < 200 || counter === 220) {
+                newCell.innerText = "X";
+            } else {
+                newCell.id = "cell";
+                newCell.classList.add("holder");
+            }
+        }
+        newCell.classList.add("cell");
         grid.appendChild(newCell);
     }
     return grid;
@@ -95,6 +118,12 @@ document.createGarbage = function(){
     garbageCan.innerHTML = "Prullenbak";
 
     return garbageCan;
+};
+
+Number.prototype.between = function(a, b) {
+    let min = Math.min.apply(Math, [a, b]),
+        max = Math.max.apply(Math, [a, b]);
+    return this > min && this < max;
 };
 
 
