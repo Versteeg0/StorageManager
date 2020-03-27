@@ -19,7 +19,7 @@ document.createLabel = function(text, newLine) {
         labelDiv.appendChild(label);
         return labelDiv;
     }
-}
+};
 
 
 document.createSelect = function(array){
@@ -50,6 +50,27 @@ document.createNumberInput = function(id, placeholder){
     input.placeholder = placeholder;
     return input;
 };
+
+document.createPopUpValue = function(labelvalue, inputID, value, isNumber){
+    let div = document.createElement("div");
+    div.classList.add("form-inline");
+    let label = document.createElement("label");
+    label.innerText = labelvalue;
+    let br = document.createElement("br");
+    div.appendChild(label);
+
+    let input = document.createElement("input");
+    if(isNumber){
+        input.type = "number";
+    }
+    input.classList.add("form-control");
+    input.classList.add("popupInput");
+    input.id = inputID;
+    input.value = value;
+    div.appendChild(input);
+    div.appendChild(br);
+    return div;
+}
 
 document.createCells = function (grid, pattern){
     for (let i = 0; i < 225; i++) {

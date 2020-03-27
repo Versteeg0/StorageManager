@@ -17,7 +17,7 @@
     align-self: center;
 }
 
-.dGrid, .kGrid, .tGrid {
+.dGrid, .kGrid, .tGrid{
     margin: 2rem;
     display: grid;
     grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
@@ -28,6 +28,7 @@
     height: 200px;
     width: 300px;
 }
+
 #formContainer button{
     margin: 20px 0;
 }
@@ -36,7 +37,7 @@
     font-size: 20px;
 }
 
-.cell {
+.cell{
     min-width: 50px;
     min-height: 50px;
     max-width: 50px;
@@ -51,7 +52,7 @@
     min-height: 50px;
 }
 
-#weerDiv {
+#weerDiv{
     position: absolute;
     background: whitesmoke;
     right: 120px;
@@ -61,11 +62,11 @@
     border: 3px solid pink;
 }
 
-#chooseCity.active {
+#chooseCity.active{
     display: block;
 }
 
-#popup {
+#popup{
     position: fixed;
     top: 50%;
     left: 50%;
@@ -80,7 +81,7 @@
     transform: translate(-50%, -50%) scale(1);
 }
 
-#popup-header {
+#popup-header{
     padding: 10px 15px;
     display: flex;
     justify-content: space-between;
@@ -88,7 +89,7 @@
     border-bottom: 1px solid black;
 }
 
-#popup-header .close-button {
+#popup-header .close-button{
     cursor: pointer;
     border: none;
     outline: none;
@@ -97,11 +98,7 @@
     font-weight: bold;
 }
 
-#model-body {
-    padding: 10px 15px;
-}
-
-#overlay {
+#overlay{
     position: fixed;
     transition: 200ms ease-in-out;
     top: 0;
@@ -113,5 +110,14 @@
     pointer-events: all;
 }
 
+.popupInput{
+    width: 200px;
+    align-self: center;
+    margin: 0;
+}
+
+.form-inline{
+    margin-left: 50px;
+}
 
 
