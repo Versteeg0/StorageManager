@@ -47,8 +47,8 @@ export class PopupView {
 
         switch (data.category) {
             case "Decoratie" :
-                let sizeInCm = document.createLabel("Grootte van product: " + data.size, true);
-                let dColor = document.createLabel("Kleur van de Decoratie: " + data.color, true);
+                let sizeInCm = document.createLabel("Grootte van decoratie: " + data.size, true);
+                let dColor = document.createLabel("Kleur van de decoratie: " + data.color, true);
                 let amountInBox = document.createLabel("Hoeveelheid per verpakking: " + data.amountInBox, true);
                 popupBody.appendChild(sizeInCm);
                 popupBody.appendChild(dColor);
@@ -56,19 +56,16 @@ export class PopupView {
                 break;
 
             case "Kleding" :
-                let kColor = document.createLabel("Kleur van Kleding stuk" + data.color, true);
-                let kWeight = document.createLabel("gewicht van Kleding stuk" + data.weight, true);
+                let kColor = document.createLabel("Kleur van kledingstuk:" + data.color, true);
+                let kWeight = document.createLabel("Gewicht van kledingstuk:" + data.weight, true);
                 popupBody.appendChild(kColor);
                 popupBody.appendChild(kWeight);
                 break;
 
             case "Tierelantijn" :
-                let tWeight = document.createLabel("Gewicht van Tierlantijn stuk" + data.weight, true);
+                let tWeight = document.createLabel("Gewicht van Tierlantijn:" + data.weight, true);
                 popupBody.appendChild(tWeight);
                 break;
-
-            default:
-                let Default = "default";
         }
 
         if (data.extra != null) {

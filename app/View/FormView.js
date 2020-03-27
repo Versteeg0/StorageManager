@@ -61,18 +61,14 @@ export class FormView{
         this.minVoorraad = document.createLabel("Wat is de minimale voorraad van het product?");
         this.phase2Form.appendChild(this.minVoorraad);
 
-        this.minVoorraadInput = document.createInput("minVoorraadInput", "aantal");
+        this.minVoorraadInput = document.createNumberInput("minVoorraadInput", "aantal");
         this.phase2Form.appendChild(this.minVoorraadInput);
 
         this.hVoorraad = document.createLabel("Wat is de huidige voorraad van het product?");
         this.phase2Form.appendChild(this.hVoorraad);
 
-        this.hVoorraadInput = document.createInput("hVoorraadInput", "aantal");
+        this.hVoorraadInput = document.createNumberInput("hVoorraadInput", "aantal");
         this.phase2Form.appendChild(this.hVoorraadInput);
-        this.errorMessage = document.createLabel("Vul alle velden in");
-
-        this.phase2Form.appendChild(this.errorMessage);
-        this.errorMessage.style.display = "none";
 
         this.phase2Button = document.createButton('phase2Button', 'Volgende');
         this.phase2Button.addEventListener('click', () => {
@@ -93,7 +89,7 @@ export class FormView{
         this.phase3Button = document.createButton('phase3Button', 'Toevoegen');
         if(data == "Decoratie"){
             this.size = document.createLabel("Wat is de grootte in cm van de decoratie?");
-            this.sizeInput = document.createInput("sizeInput", "Grootte van product");
+            this.sizeInput = document.createNumberInput("sizeInput", "Grootte van product");
             this.phase3Form.appendChild(this.size);
             this.phase3Form.appendChild(this.sizeInput);
 
@@ -103,7 +99,7 @@ export class FormView{
             this.phase3Form.appendChild(this.colorInput);
 
             this.amount = document.createLabel("Wat is de hoeveelheid per verpakking van  de decoratie");
-            this.amountInput = document.createInput("amountInput", "Hoeveelheid van product");
+            this.amountInput = document.createNumberInput("amountInput", "Hoeveelheid van product");
             this.phase3Form.appendChild(this.amount);
             this.phase3Form.appendChild(this.amountInput);
             
@@ -124,7 +120,7 @@ export class FormView{
             this.phase3Form.appendChild(this.colorInput);
 
             this.weight = document.createLabel("Wat is het gewicht van het kledingstuk?");
-            this.weightInput = document.createInput("weightInput", "Gewicht van product");
+            this.weightInput = document.createNumberInput("weightInput", "Gewicht van product in kg");
             this.phase3Form.appendChild(this.weight);
             this.phase3Form.appendChild(this.weightInput);
 
@@ -139,7 +135,7 @@ export class FormView{
 
         }else{
             this.weight = document.createLabel("Wat is het gewicht van de tierelantijn?");
-            this.weightInput = document.createInput("weightInput", "Gewicht van product");
+            this.weightInput = document.createNumberInput("weightInput", "Gewicht van product in kg");
             this.phase3Form.appendChild(this.weight);
             this.phase3Form.appendChild(this.weightInput);
 

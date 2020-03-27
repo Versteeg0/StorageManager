@@ -42,7 +42,16 @@ document.createInput = function(id, placeholder){
     return input;
 };
 
-document.createCells = function (grid){
+document.createNumberInput = function(id, placeholder){
+    let input = document.createElement("input");
+    input.classList.add("form-control");
+    input.type = "number";
+    input.id = id;
+    input.placeholder = placeholder;
+    return input;
+};
+
+document.createCells = function (grid, pattern){
     for (let i = 0; i < 225; i++) {
         let newCell = document.createElement("div");
         newCell.id = "cell";
