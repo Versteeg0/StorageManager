@@ -102,10 +102,16 @@ export class PopupView {
         popupFooter.appendChild(br1);
 
         //Image upload / canvas
-        let canvas = document.createElement("canvas");
+        const canvas = document.createElement("canvas");
+        const context = canvas.getContext("2d");
         canvas.id = 'canvas';
         canvas.width = 500;
         canvas.height = 500;
+
+        context.lineJoin = 'round';
+        context.lineCap = 'round';
+        context.lineWidth = 8;
+        context.strokeStyle = "#000000";
 
         let image = new Image();
         image.id = "empty";
@@ -116,10 +122,10 @@ export class PopupView {
         image.onload = function () {
             image.width = canvas.width;
             image.height = canvas.height;
-            this.context = canvas.getContext("2d");
-            this.context.drawImage(image, 0, 0, image.width, image.height);
+            context.clearRect(0, 0, canvas.width, canvas.height);
+            context.drawImage(image, 0, 0, image.width, image.height);
             image.id = "filled";
-        }
+        };
 
         let br = document.createElement("br");
         let br2 = document.createElement("br");
@@ -145,8 +151,39 @@ export class PopupView {
         let saveImage = document.createButton("saveImage", "Foto opslaan");
         saveImage.addEventListener('click', () => {
             if (image.id == "filled") {
-                this.saveImage(data.name, image.src);
+                this.saveImage(data.name, canvas.toDataURL());
             }
+        });
+
+        //DRAW ON CANVAS
+        let mousePressed = false;
+        let lastX = null;
+        let lastY = null;
+
+        canvas.addEventListener("mousedown", e =>{
+            mousePressed = true;
+            let target = event.target;
+            let rect = target.getBoundingClientRect();
+            let x = e.clientX - rect.left;
+            let y = e.clientY -  rect.top;
+            lastX = x; lastY = y;
+        })
+
+        canvas.addEventListener('mouseup', e =>{
+            mousePressed = false;
+        })
+
+        canvas.addEventListener('mousemove', e =>{
+            let target = e.target;
+            let rect = target.getBoundingClientRect();
+            let x = e.clientX - rect.left;
+            let y = e.clientY -  rect.top;
+            if (mousePressed){
+                context.moveTo(lastX, lastY);
+                context.closePath();
+                context.stroke();
+            }
+            lastX = x; lastY = y;
         });
 
         popupFooter.appendChild(uploadButton);
@@ -171,4 +208,12 @@ export class PopupView {
         this.extra = document.createInput("extra", "Geef het een waarded");
         newFields.appendChild(this.extra);
     }
+
+   /* drawOnCanvas(){
+        let context = this.canvas.getContext("2d");
+
+
+
+    }*/
+
 }
