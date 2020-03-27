@@ -54,6 +54,7 @@ export default class MagazijnController{
             this.item.description = data[1];
             this.item.mVoorraad = data[2];
             this.item.hVoorraad = data[3];
+            this.item.salePriceEXCL = data[4];
             this.formView.phase3(this.item.category);
         };
 
@@ -103,10 +104,8 @@ export default class MagazijnController{
             this.popupView.handleDetails(item, container);
         };
 
-        this.popupView.addExtraItem = (id, extra) => {
-            let item = this.itemService.getItem(id);
-            item.extra = extra;
-            this.itemService.saveItem(item);
+        this.popupView.editItem = (data) => {
+            this.itemService.saveItem(data);
             this.drawPages();
         };
 
