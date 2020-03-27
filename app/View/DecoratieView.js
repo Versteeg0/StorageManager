@@ -33,7 +33,7 @@ export class DecoratieView{
     }
 
     makeRow(){
-        this.grid = document.createCells(this.grid);
+        this.grid = document.createCells(this.grid, 1);
         this.decoratieRow.appendChild(this.grid);
     }
 
