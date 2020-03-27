@@ -1,8 +1,5 @@
 export class PopupView {
 
-    constructor() {
-    }
-
     handleDetails(data, container) {
 
         //Popup group
@@ -37,33 +34,35 @@ export class PopupView {
         popupBody.id = "popup-body";
 
         //Body children
-        let description = document.createLabel("Beschrijving: " + data.description, true);
-        let minimalSupply = document.createLabel("Minimale voorraad: " + data.mVoorraad, true);
-        let currentSupply = document.createLabel("Huidige voorraad: " + data.hVoorraad, true);
+        let description = document.createPopUpValue("Beschrijving: ", "description", data.description, false);
+        let minimalSupply = document.createPopUpValue("Minimale voorraad: ", "mVoorraad", data.mVoorraad, true);
+        let currentSupply = document.createPopUpValue("Huidige voorraad: ", "hVoorraad", data.hVoorraad, true);
+        let salePriceEXCL = document.createPopUpValue("Verkoopprijs excl BTW: ", "salePriceEXCL", data.salePriceEXCL, true);
 
         popupBody.appendChild(description);
         popupBody.appendChild(minimalSupply);
         popupBody.appendChild(currentSupply);
+        popupBody.appendChild(salePriceEXCL);
 
         switch (data.category) {
             case "Decoratie" :
-                let sizeInCm = document.createLabel("Grootte van decoratie: " + data.size, true);
-                let dColor = document.createLabel("Kleur van de decoratie: " + data.color, true);
-                let amountInBox = document.createLabel("Hoeveelheid per verpakking: " + data.amountInBox, true);
+                let sizeInCm = document.createPopUpValue("Grootte van decoratie: ", "sizeInCm", data.size, true);
+                let dColor = document.createPopUpValue("Kleur van de decoratie: ", "dColor", data.color, false);
+                let amountInBox = document.createPopUpValue("Hoeveelheid per verpakking: ", "amountInBox", data.amountInBox, true);
                 popupBody.appendChild(sizeInCm);
                 popupBody.appendChild(dColor);
                 popupBody.appendChild(amountInBox);
                 break;
 
             case "Kleding" :
-                let kColor = document.createLabel("Kleur van kledingstuk:" + data.color, true);
-                let kWeight = document.createLabel("Gewicht van kledingstuk:" + data.weight, true);
+                let kColor = document.createPopUpValue("Kleur van kledingstuk:", "kColor", data.color, false);
+                let kWeight = document.createPopUpValue("Gewicht van kledingstuk:", "kWeight", data.weight, true);
                 popupBody.appendChild(kColor);
                 popupBody.appendChild(kWeight);
                 break;
 
             case "Tierelantijn" :
-                let tWeight = document.createLabel("Gewicht van Tierlantijn:" + data.weight, true);
+                let tWeight = document.createPopUpValue("Gewicht van Tierlantijn:", "tWeight", data.weight, true);
                 popupBody.appendChild(tWeight);
                 break;
         }
@@ -72,7 +71,6 @@ export class PopupView {
             let extra = document.createLabel("Extra: " + data.extra, true);
             popupBody.appendChild(extra);
         }
-
 
         //Footer buttons
         let popupFooter = document.createElement("div");
@@ -89,21 +87,23 @@ export class PopupView {
 
         let opslaanButton = document.createButton("button", "Opslaan");
         opslaanButton.addEventListener('click', () => {
-            this.addExtraItem(data.name, extra.value);
-            let extraVeld = document.createLabel(this.extra.value, true);
-            popupBody.appendChild(extraVeld);
+            this.saveItem(data);
+            if(this.extra != null){
+                let extraVeld = document.createLabel(this.extra.value, true);
+                popupBody.appendChild(extraVeld);
+            }
         });
+
         let br1 = document.createElement("br");
-        popupFooter.appendChild(extraVeldButton);
-        popupFooter.appendChild(opslaanButton);
-        popupFooter.appendChild(br1);
+        popupBody.appendChild(extraVeldButton);
+        popupBody.appendChild(opslaanButton);
 
         //Image upload / canvas
         const canvas = document.createElement("canvas");
         const context = canvas.getContext("2d");
         canvas.id = 'canvas';
-        canvas.width = 500;
-        canvas.height = 500;
+        canvas.width = 400;
+        canvas.height = 400;
 
         context.lineJoin = 'round';
         context.lineCap = 'round';
@@ -164,11 +164,11 @@ export class PopupView {
             let x = e.clientX - rect.left;
             let y = e.clientY -  rect.top;
             lastX = x; lastY = y;
-        })
+        });
 
         canvas.addEventListener('mouseup', e =>{
             mousePressed = false;
-        })
+        });
 
         canvas.addEventListener('mousemove', e =>{
             let target = e.target;
@@ -195,14 +195,44 @@ export class PopupView {
         popup.appendChild(popupHeader);
         popup.appendChild(popupBody);
         popup.appendChild(popupFooter);
-
         container.appendChild(overlay);
         container.appendChild(popup);
     }
 
     extraFieldsButton() {
-        let newFields = document.getElementById('popup');
+        let newField = document.getElementById('popup-body');
         this.extra = document.createInput("extra", "Geef het een waarded");
-        newFields.appendChild(this.extra);
+        newField.appendChild(this.extra);
     }
+
+    saveItem(data){
+        data.description = document.getElementById("description").value;
+        data.mVoorraad = document.getElementById("mVoorraad").value;
+        data.hVoorraad = document.getElementById("hVoorraad").value;
+        data.salePriceEXCL = document.getElementById("salePriceEXCL").value;
+
+        switch (data.category) {
+            case "Decoratie" :
+                data.size = document.getElementById("sizeInCm").value;
+                data.color = document.getElementById("dColor").value;
+                data.amountInBox = document.getElementById("amountInBox").value;
+                break;
+
+            case "Kleding" :
+                data.color = document.getElementById("kColor").value;
+                data.weight = document.getElementById("kWeight").value;
+                break;
+
+            case "Tierelantijn" :
+                data.weight = document.getElementById("tWeight").value;
+                break;
+        }
+
+        if(this.extra != null){
+            data.extra = this.extra.value;
+            this.extra = null;
+        }
+        this.editItem(data);
+    }
+
 }

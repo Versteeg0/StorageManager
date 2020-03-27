@@ -70,9 +70,15 @@ export class FormView{
         this.hVoorraadInput = document.createNumberInput("hVoorraadInput", "aantal");
         this.phase2Form.appendChild(this.hVoorraadInput);
 
+        this.salePriceEXCL = document.createLabel("Wat is de verkoopprijs EXCL BTW?");
+        this.phase2Form.appendChild(this.salePriceEXCL);
+
+        this.salePriceEXCLInput = document.createNumberInput("salePriceEXCLInput", "bedrag");
+        this.phase2Form.appendChild(this.salePriceEXCLInput);
+
         this.phase2Button = document.createButton('phase2Button', 'Volgende');
         this.phase2Button.addEventListener('click', () => {
-            this.inputs = [this.naamInput.value, this.beschrijvingInput.value, this.minVoorraadInput.value, this.hVoorraadInput.value]
+            this.inputs = [this.naamInput.value, this.beschrijvingInput.value, this.minVoorraadInput.value, this.hVoorraadInput.value, this.salePriceEXCLInput.value]
             this.processPhase2(this.inputs);
         });
 
