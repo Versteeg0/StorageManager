@@ -208,12 +208,4 @@ export class PopupView {
         this.extra = document.createInput("extra", "Geef het een waarded");
         newFields.appendChild(this.extra);
     }
-
-   /* drawOnCanvas(){
-        let context = this.canvas.getContext("2d");
-
-
-
-    }*/
-
 }
