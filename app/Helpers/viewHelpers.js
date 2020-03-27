@@ -73,7 +73,7 @@ document.createPopUpValue = function(labelvalue, inputID, value, isNumber){
 }
 
 document.createCells = function (grid, choice){
-    for (let i = 0; i < 225; i++) {
+    for (let counter = 0; counter < 225; counter++) {
         let newCell = document.createElement("div");
         if(choice === 1) {
             if (counter > 14 && counter < 30 || counter > 84 && counter < 90 || counter === 200) {
