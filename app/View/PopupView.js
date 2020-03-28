@@ -114,7 +114,7 @@ export class PopupView {
 
         let image = new Image();
         image.id = "empty";
-        if (data.photo != undefined) {
+        if (data.photo !== undefined) {
             image.src = data.photo
         }
 
@@ -149,7 +149,7 @@ export class PopupView {
 
         let saveImage = document.createButton("saveImage", "Foto opslaan");
         saveImage.addEventListener('click', () => {
-            if (image.id == "filled") {
+            if (image.id === "filled") {
                 this.saveImage(data.name, canvas.toDataURL());
             }
         });

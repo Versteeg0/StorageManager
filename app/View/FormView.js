@@ -15,6 +15,7 @@ export class FormView{
 
     }
 
+    // Create first form phase
     phase1(){
         while (this.form.hasChildNodes()) {
             this.form.removeChild(this.form.lastChild);
@@ -33,10 +34,11 @@ export class FormView{
         this.phase1Form.appendChild(this.phase1Button);
         this.phase1Button.addEventListener('click', () => {
             this.processPhase1(this.multiSelect.value);
-        })
+        });
         this.form.appendChild(this.phase1Form);
     }
 
+    // Create second phase
     phase2(){
         while (this.form.hasChildNodes()) {
             this.form.removeChild(this.form.lastChild);
@@ -86,6 +88,7 @@ export class FormView{
         this.form.appendChild(this.phase2Form);
     }
 
+    // Create last phase
     phase3(data){
         while (this.form.hasChildNodes()) {
             this.form.removeChild(this.form.lastChild);
@@ -93,7 +96,7 @@ export class FormView{
         this.phase3Form = document.createElement("form-group");
         this.phase3Form.id = "phase3";
         this.phase3Button = document.createButton('phase3Button', 'Toevoegen');
-        if(data == "Decoratie"){
+        if(data === "Decoratie"){
             this.size = document.createLabel("Wat is de grootte in cm van de decoratie?");
             this.sizeInput = document.createNumberInput("sizeInput", "Grootte van product");
             this.phase3Form.appendChild(this.size);
@@ -119,7 +122,7 @@ export class FormView{
                 this.processPhase3(this.inputs);
             });
 
-        }else if(data == "Kleding"){
+        }else if(data === "Kleding"){
             this.color = document.createLabel("Wat is de kleur van het kledingstuk?");
             this.colorInput = document.createInput("colorInput", "Kleur van product");
             this.phase3Form.appendChild(this.color);
@@ -134,7 +137,7 @@ export class FormView{
                 this.inputs = {
                     color: this.colorInput.value,
                     weight: this.weightInput.value
-                }
+                };
                 e.preventDefault();
                 this.processPhase3(this.inputs);
             });
@@ -148,15 +151,13 @@ export class FormView{
             this.phase3Button.addEventListener('click', (e) => {
                 this.inputs = {
                     weight: this.weightInput.value
-                }
+                };
                 e.preventDefault();
                 this.processPhase3(this.inputs);
             });
-
         }
         this.phase3Form.appendChild(this.phase3Button);
         this.form.appendChild(this.phase3Form);
-
     }
 
 }

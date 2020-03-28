@@ -113,7 +113,7 @@ export class TierelantijnView{
         const draggableElement = document.getElementById(id);
         if(draggableElement != null){
             if(event.target.classList.contains("holder")){
-                if(draggableElement.className == "selectedTItem"){
+                if(draggableElement.className === "selectedTItem"){
                     draggableElement.classList.remove("selectedTItem");
                     draggableElement.classList.add("tDropped");
                 }

@@ -1,5 +1,3 @@
-import { MagazijnItem} from "./MagazijnItem";
-
 export class MagazijnItemService{
 
     saveItem(item){
@@ -38,12 +36,4 @@ export class MagazijnItemService{
         }
         return item;
     }
-
-    deleteItem(data){
-        let itemArray = JSON.parse(localStorage.getItem("items") || "[]");
-        let index = itemArray.indexOf(data);
-        itemArray.splice(index, 1);
-        localStorage.setItem('items', JSON.stringify(itemArray));
-    }
-    
 }

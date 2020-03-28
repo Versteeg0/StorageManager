@@ -114,7 +114,7 @@ export class KledingView{
         const draggableElement = document.getElementById(id);
         if(draggableElement != null){
             if(event.target.classList.contains("holder")){
-                if(draggableElement.className == "selectedKItem"){
+                if(draggableElement.className === "selectedKItem"){
                     draggableElement.classList.remove("selectedKItem");
                     draggableElement.classList.add("kDropped");
                 }

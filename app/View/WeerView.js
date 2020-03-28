@@ -39,8 +39,6 @@ export class WeerView {
         weerDiv.appendChild(table);
 
         this.container.appendChild(weerDiv);
-
-
     }
 
     setTemp(temp){

@@ -60,11 +60,11 @@ export default class MagazijnController{
         };
 
         this.formView.processPhase3 = (data) => {
-            if(this.item.category == "Decoratie"){
+            if(this.item.category === "Decoratie"){
                 this.item.size = data.size;
                 this.item.color = data.color;
                 this.item.amountInBox = data.amount;
-            }else if(this.item.category == "Kleding"){
+            }else if(this.item.category === "Kleding"){
                 this.item.color = data.color;
                 this.item.weight = data.weight;
             }else{
@@ -122,11 +122,13 @@ export default class MagazijnController{
         document.getElementById("tierelantijn").style.display = "none";
     }
 
+    // get the temperature from the webAPI
     async getTemp(city){
         let x = await this.Weer.generateJsonFromAPI(city);
         this.weerView.setTemp(x);
     }
 
+    // Refreshes all the pages
     drawPages(){
         this.decoratieView.draw(this.itemService.getItems("Decoratie"), this.pageService.getDecoratiePage());
         this.decoratieView.eventListeners();
@@ -138,9 +140,8 @@ export default class MagazijnController{
         this.tierelantijnView.eventListeners();
     }
 
+    // Calculates the price including the BTW
     calculateBTW(price){
         return (price / 100) * 21;
     }
-
-
 }

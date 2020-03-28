@@ -4,7 +4,7 @@ document.createButton = function(name, text){
     button.id = name;
     button.innerText = text;
     return button;
-}
+};
 
 document.createLabel = function(text, newLine) {
     let labelDiv = document.createElement("div");
@@ -32,7 +32,7 @@ document.createSelect = function(array){
         multi.appendChild(option);
     }
     return multi;
-}
+};
 
 document.createInput = function(id, placeholder){
     let input = document.createElement("input");
@@ -70,7 +70,7 @@ document.createPopUpValue = function(labelvalue, inputID, value, isNumber){
     div.appendChild(input);
     div.appendChild(br);
     return div;
-}
+};
 
 document.createCells = function (grid, choice){
     for (let counter = 0; counter < 225; counter++) {
@@ -121,12 +121,6 @@ document.createGarbage = function(){
     garbageCan.appendChild(garbageImage);
 
     return garbageCan;
-};
-
-Number.prototype.between = function(a, b) {
-    let min = Math.min.apply(Math, [a, b]),
-        max = Math.max.apply(Math, [a, b]);
-    return this > min && this < max;
 };
 
 

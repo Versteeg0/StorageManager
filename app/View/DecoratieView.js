@@ -115,7 +115,7 @@ export class DecoratieView{
         const draggableElement = document.getElementById(id);
         if(draggableElement != null){
             if(event.target.classList.contains("holder")){
-                    if(draggableElement.className == "selectedDItem"){
+                    if(draggableElement.className === "selectedDItem"){
                         draggableElement.classList.remove("selectedDItem");
                         draggableElement.classList.add("dDropped");
                     }
