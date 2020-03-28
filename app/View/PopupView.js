@@ -38,11 +38,13 @@ export class PopupView {
         let minimalSupply = document.createPopUpValue("Minimale voorraad: ", "mVoorraad", data.mVoorraad, true);
         let currentSupply = document.createPopUpValue("Huidige voorraad: ", "hVoorraad", data.hVoorraad, true);
         let salePriceEXCL = document.createPopUpValue("Verkoopprijs excl BTW: ", "salePriceEXCL", data.salePriceEXCL, true);
+        let salePriceBTW = document.createLabel("Verkoopprijs incl BTW: " + data.salePriceBTW, true);
 
         popupBody.appendChild(description);
         popupBody.appendChild(minimalSupply);
         popupBody.appendChild(currentSupply);
         popupBody.appendChild(salePriceEXCL);
+        popupBody.appendChild(salePriceBTW);
 
         switch (data.category) {
             case "Decoratie" :

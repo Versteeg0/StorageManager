@@ -55,6 +55,7 @@ export default class MagazijnController{
             this.item.mVoorraad = data[2];
             this.item.hVoorraad = data[3];
             this.item.salePriceEXCL = data[4];
+            this.item.salePriceBTW = parseInt(this.item.salePriceEXCL) + this.calculateBTW(this.item.salePriceEXCL);
             this.formView.phase3(this.item.category);
         };
 
@@ -105,6 +106,7 @@ export default class MagazijnController{
         };
 
         this.popupView.editItem = (data) => {
+            data.salePriceBTW = parseInt(data.salePriceEXCL) + this.calculateBTW(data.salePriceEXCL);
             this.itemService.saveItem(data);
             this.drawPages();
         };
@@ -135,5 +137,10 @@ export default class MagazijnController{
         this.tierelantijnView.draw(this.itemService.getItems("Tierelantijn"), this.pageService.getTierelantijnPage());
         this.tierelantijnView.eventListeners();
     }
+
+    calculateBTW(price){
+        return (price / 100) * 21;
+    }
+
 
 }

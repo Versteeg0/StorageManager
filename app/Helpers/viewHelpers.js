@@ -115,7 +115,10 @@ document.createPageContainer = function(id){
 document.createGarbage = function(){
     let garbageCan = document.createElement("div");
     garbageCan.classList.add("garbage");
-    garbageCan.innerHTML = "Prullenbak";
+    let garbageImage = new Image(100,100);
+    garbageImage.src = "app/images/559-01-512.png";
+    garbageImage.classList.add("garbage");
+    garbageCan.appendChild(garbageImage);
 
     return garbageCan;
 };
